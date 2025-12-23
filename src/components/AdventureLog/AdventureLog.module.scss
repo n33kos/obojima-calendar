@@ -35,50 +35,15 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
-  padding: $spacing-lg;
 }
 
 .entry {
-  border-left: 3px solid $color-accent;
-  padding-left: $spacing-lg;
   padding-bottom: $spacing-lg;
   position: relative;
   transition: all $transition-base;
 
   &:not(:last-child) {
     border-bottom: 1px solid $color-border;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: -7px;
-    top: 0;
-    width: 11px;
-    height: 11px;
-    background: $color-accent;
-    border-radius: 50%;
-    border: 2px solid $color-surface;
-    transition: all $transition-base;
-  }
-
-  &.highlighted {
-    background: lighten($color-accent, 40%);
-    border-left-color: darken($color-accent, 10%);
-    border-left-width: 5px;
-    padding: $spacing-md;
-    padding-left: $spacing-lg;
-    margin: 0 (-$spacing-sm);
-    border-radius: $radius-md;
-    box-shadow: 0 0 0 3px rgba($color-accent, 0.2);
-
-    &::before {
-      background: darken($color-accent, 10%);
-      width: 15px;
-      height: 15px;
-      left: -9px;
-      box-shadow: 0 0 8px rgba($color-accent, 0.5);
-    }
   }
 }
 

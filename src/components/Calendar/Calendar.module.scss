@@ -2,6 +2,7 @@
 
 .calendar {
   position: relative;
+  width: 480px;
 }
 
 .header {
@@ -87,7 +88,6 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: $spacing-sm;
 }
 
 .day {
@@ -96,8 +96,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
+  border: 1px solid rgba($color-border, 0.3);
   padding: $spacing-sm;
   transition: all $transition-fast;
   cursor: pointer;
@@ -111,7 +110,7 @@
   }
 
   &.isCurrentDay {
-    background: $color-current-day;
+    background: $color-primary;
     color: white;
     border-color: darken($color-current-day, 10%);
     font-weight: $font-weight-bold;

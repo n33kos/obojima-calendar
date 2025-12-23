@@ -99,12 +99,6 @@ function App() {
       <img src="/background.png" alt="scribe's desk background" className={styles.backgroundImage} />
 
       <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 22deg)` }}>
-          {!isViewingToday && (
-            <button className={styles.todayButton} onClick={handleReturnToToday}>
-              Return to Today
-            </button>
-          )}
-
             <Calendar
               currentDate={data.date}
               displayedMonth={currentMonth}
@@ -115,7 +109,12 @@ function App() {
             />
 
           <div className={styles.sidebar}>
-            <CurrentDate date={data.date} time={data.time} />
+            <CurrentDate
+              date={data.date}
+              time={data.time}
+              isViewingToday={isViewingToday}
+              onReturnToToday={handleReturnToToday}
+            />
             <AdventureLog
               entries={data.adventureLog || []}
               events={data.events || []}

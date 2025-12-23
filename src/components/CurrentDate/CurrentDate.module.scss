@@ -1,6 +1,7 @@
 @import '@/styles/variables.scss';
 
 .currentDate {
+  position: relative;
   text-align: center;
   color: $color-primary;
   font-weight: $font-weight-bold;
@@ -38,4 +39,30 @@
 .twelveHourTime {
   font-weight: $font-weight-medium;
   color: $color-text-secondary;
+}
+
+.todayButton {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: $color-accent;
+  color: white;
+  padding: clamp(0.25rem, 0.5vh, 1rem) clamp(0.5rem, 1vw, 2rem);
+  border-radius: $radius-md;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  font-weight: $font-weight-bold;
+  transition: all $transition-fast;
+  border: 2px solid $color-accent;
+
+  &:hover {
+    background: lighten($color-accent, 10%);
+    border-color: lighten($color-accent, 10%);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.98);
+  }
 }

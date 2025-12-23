@@ -48,11 +48,6 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
     <div className={styles.adventureLog}>
       <h2 className={styles.header}>
         Adventure Log
-        {!isCurrentDate && nearestEntry && (
-          <div className={styles.headerSubtitle}>
-            Showing nearest entry to selected date
-          </div>
-        )}
       </h2>
       
       <div className={styles.content}>

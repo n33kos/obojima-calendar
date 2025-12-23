@@ -16,10 +16,10 @@ $color-text-muted: #8b7d6b;
 
 $color-background: #f5efe6; // Cream/aged paper
 $color-surface: #ffffff;
-$color-border: #d4c4b0;
+$color-border: #8b6f47;
 
 // Semantic colors
-$color-current-day: #c17767; // Warm red for current day
+$color-current-day: $color-secondary; // Warm red for current day
 $color-event: #6b8e7d;
 $color-important: #b85450;
 
@@ -32,8 +32,8 @@ $spacing-xl: 2rem;
 $spacing-xxl: 3rem;
 
 // Typography
-$font-family-base: 'Bilbo', cursive, 'Georgia', 'Times New Roman', serif;
-$font-family-display: 'Bilbo', cursive, 'Cinzel', Georgia, serif; // For headers
+$font-family-base: 'Fondamento', cursive, 'Georgia', 'Times New Roman', serif;
+$font-family-display: 'Fondamento', cursive, 'Cinzel', Georgia, serif; // For headers
 $font-family-mono: 'Courier New', monospace;
 
 $font-size-xs: 0.75rem;
