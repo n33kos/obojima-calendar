@@ -96,7 +96,7 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <img src="/background.png" alt="scribe's desk background" className={styles.backgroundImage} />
+      <img src="./background.png" alt="scribe's desk background" className={styles.backgroundImage} />
 
       <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 22deg)` }}>
             <Calendar
