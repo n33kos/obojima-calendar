@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-const RELATIVE_SCALE = 0.8;
-
 /**
  * Calculate the scale factor for a container to match a background image with object-fit: cover
  *
@@ -40,5 +38,5 @@ export function useBackgroundScale(imageWidth: number, imageHeight: number): num
     };
   }, [imageWidth, imageHeight]);
 
-  return scale * RELATIVE_SCALE;
+  return scale;
 }

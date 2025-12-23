@@ -2,12 +2,13 @@
 @import '@/styles/mixins.scss';
 
 .adventureLog {
+  position: relative;
+}
+
+.content {
   @include hiddenScrollbar;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-lg;
-  border: 2px solid $color-border;
-  max-height: 600px;
-  overflow-y: auto;
+  height: 310px;
+  max-height: 100%;
 }
 
 .header {
@@ -16,10 +17,8 @@
   margin-bottom: $spacing-lg;
   text-align: center;
   padding-bottom: $spacing-md;
-  border-bottom: 2px solid $color-border;
-  position: sticky;
+  border-bottom: 1px solid $color-primary;
   top: 0;
-  background: $color-surface;
   z-index: $z-index-sticky;
 }
 

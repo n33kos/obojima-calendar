@@ -4,10 +4,6 @@
   text-align: center;
   color: $color-primary;
   font-weight: $font-weight-bold;
-  padding: clamp(0.5rem, 1.5vh, 2rem);
-  border-radius: $radius-lg;
-  box-shadow: $shadow-md;
-  border: 2px solid $color-border;
   margin: 0 auto;
   max-width: 100%;
   display: flex;
@@ -16,7 +12,7 @@
 }
 
 .dateDisplay {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: 1rem;
   line-height: 1.2;
 }
 
@@ -24,8 +20,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.5rem, 1vw, 1rem);
-  font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+  gap: 1rem;
+  font-size: 1rem;
   color: $color-text-secondary;
 }
 

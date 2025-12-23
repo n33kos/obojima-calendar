@@ -3,7 +3,6 @@ import { useCalendarData } from './hooks/useCalendarData';
 import { useBackgroundScale } from './hooks/useBackgroundScale';
 import { Calendar } from './components/Calendar/Calendar';
 import { CurrentDate } from './components/CurrentDate/CurrentDate';
-import { TimeOfDay } from './components/TimeOfDay/TimeOfDay';
 import { AdventureLog } from './components/AdventureLog/AdventureLog';
 import { createHandleDayClick, createHandleReturnToToday } from './App.utils';
 import type { Month, CalendarDate } from './types';
@@ -99,36 +98,33 @@ function App() {
     <div className={styles.app}>
       <img src="/background.png" alt="scribe's desk background" className={styles.backgroundImage} />
 
-      <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 10deg)` }}>
-        <div className={styles.contentOverlay}>
+      <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 22deg)` }}>
           {!isViewingToday && (
             <button className={styles.todayButton} onClick={handleReturnToToday}>
               Return to Today
             </button>
           )}
 
-          <CurrentDate date={data.date} time={data.time} />
+            <Calendar
+              currentDate={data.date}
+              displayedMonth={currentMonth}
+              selectedDate={selectedDate}
+              events={data.events}
+              onDateClick={handleDayClick}
+              onMonthChange={setDisplayedMonth}
+            />
 
-          <TimeOfDay time={data.time} />
-          
-          <Calendar
-            currentDate={data.date}
-            displayedMonth={currentMonth}
-            selectedDate={selectedDate}
-            events={data.events}
-            onDateClick={handleDayClick}
-            onMonthChange={setDisplayedMonth}
-          />
-
-          <AdventureLog
-            entries={data.adventureLog || []}
-            events={data.events || []}
-            selectedDate={selectedDate || data.date}
-            currentDate={data.date}
-          />
+          <div className={styles.sidebar}>
+            <CurrentDate date={data.date} time={data.time} />
+            <AdventureLog
+              entries={data.adventureLog || []}
+              events={data.events || []}
+              selectedDate={selectedDate || data.date}
+              currentDate={data.date}
+              />
+          </div>
         </div>
         
-      </div>
       
     </div>
   );
