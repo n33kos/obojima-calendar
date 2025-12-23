@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react';
 import { useCalendarData } from './hooks/useCalendarData';
 import { useBackgroundScale } from './hooks/useBackgroundScale';
 import { Calendar } from './components/Calendar/Calendar';
+import { CurrentDate } from './components/CurrentDate/CurrentDate';
 import { TimeOfDay } from './components/TimeOfDay/TimeOfDay';
 import { AdventureLog } from './components/AdventureLog/AdventureLog';
-import { formatDateWithWeekday, formatTime } from './utils/calendar.utils';
 import { createHandleDayClick, createHandleReturnToToday } from './App.utils';
 import type { Month, CalendarDate } from './types';
 import styles from './App.module.scss';
@@ -102,14 +102,7 @@ function App() {
       <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 10deg)` }}>
         <div className={styles.contentOverlay}>
           <header className={styles.header}>
-            <div className={styles.currentDate}>
-              <div>
-                {formatDateWithWeekday(data.date)}
-              </div>s
-              <div>
-                Bell {formatTime(data.time.bell, data.time.knot)}
-              </div>
-            </div>
+            <CurrentDate date={data.date} time={data.time} />
             {!isViewingToday && (
               <button className={styles.todayButton} onClick={handleReturnToToday}>
                 Return to Today

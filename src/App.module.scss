@@ -158,19 +158,6 @@
   }
 }
 
-.currentDate {
-  text-align: center;
-  font-size: clamp(0.875rem, 1.8vw, 1.5rem);
-  color: $color-primary;
-  font-weight: $font-weight-bold;
-  padding: clamp(0.5rem, 1.5vh, 2rem);
-  border-radius: $radius-lg;
-  box-shadow: $shadow-md;
-  border: 2px solid $color-border;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
 .footer {
   text-align: center;
   margin-top: $spacing-xxl;
