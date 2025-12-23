@@ -12,3 +12,19 @@
   @include hiddenScrollbar;
   overflow-x: scroll;
 }
+
+@mixin buttonReset {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  outline: inherit;
+  line-height: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

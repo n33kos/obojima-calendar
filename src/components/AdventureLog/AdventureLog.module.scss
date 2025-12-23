@@ -1,5 +1,5 @@
-@import '@/styles/variables.scss';
-@import '@/styles/mixins.scss';
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .AdventureLog {
   position: relative;
@@ -12,23 +12,19 @@
 }
 
 .Header {
-  font-size: $font-size-xl;
+  font-size: $font-size-lg;
   color: $color-primary;
-  margin-bottom: $spacing-lg;
   text-align: center;
-  padding-bottom: $spacing-md;
-  border-bottom: 1px solid $color-primary;
+  padding-bottom: $spacing-sm;
   top: 0;
+  margin: 0;
   z-index: $z-index-sticky;
 }
 
-.HeaderSubtitle {
-  font-size: $font-size-xs;
-  color: $color-accent;
-  margin-top: $spacing-xs;
-  font-weight: $font-weight-normal;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.Content {
+  border: 1px solid $color-text-muted;
+  padding: $spacing-md;
+  border-radius: $radius-md;
 }
 
 .Entries {
@@ -118,7 +114,7 @@
   position: relative;
 
   &::before {
-    content: '•';
+    content: "•";
     position: absolute;
     left: 0;
     color: $color-accent;

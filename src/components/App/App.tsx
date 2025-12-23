@@ -14,7 +14,6 @@ function App() {
     error,
     refetch,
     selectedDate,
-    isViewingToday,
     currentMonth,
     handleDayClick,
     handleReturnToToday,
@@ -35,7 +34,7 @@ function App() {
         <div
           className={styles.PageContainer}
           style={{
-            transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 22deg)`,
+            transform: `perspective(1200px) scale(${backgroundScale}) rotate3d(1, 0, 0, 8deg)`,
           }}
         >
           {loading && <LoadingState />}
@@ -71,7 +70,6 @@ function App() {
                 <CurrentDate
                   date={data.date}
                   time={data.time}
-                  isViewingToday={isViewingToday}
                   onReturnToToday={handleReturnToToday}
                 />
                 <AdventureLog

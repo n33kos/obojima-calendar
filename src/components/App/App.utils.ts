@@ -1,34 +1,34 @@
-import type { CalendarDate, Month } from './types';
+import type { CalendarDate, Month } from '../../types';
 
 /**
  * Creates a handler for day click events
- * Returns a new date object with the selected day and month
+ * If clicking on the current date, returns to today (clears selection)
+ * Otherwise, sets the selected date
  */
 export function createHandleDayClick(
   currentDate: CalendarDate,
-  currentMonth: Month,
-  setSelectedDate: (date: CalendarDate | null) => void
-) {
-  return (day: number) => {
-    setSelectedDate({
-      ...currentDate,
-      month: currentMonth,
-      day,
-      weekday: currentDate.weekday, // Will be recalculated by getWeekday
-    });
-  };
-}
-
-/**
- * Creates a handler to return to the current date
- * Resets both selected date and displayed month
- */
-export function createHandleReturnToToday(
+  displayedMonth: Month,
   setSelectedDate: (date: CalendarDate | null) => void,
   setDisplayedMonth: (month: Month | null) => void
 ) {
-  return () => {
-    setSelectedDate(null);
-    setDisplayedMonth(null);
+  return (day: number) => {
+    // Check if clicking on the current date
+    const isCurrentDate =
+      currentDate.day === day &&
+      currentDate.month === displayedMonth;
+
+    if (isCurrentDate) {
+      // Return to today by clearing selection
+      setSelectedDate(null);
+      setDisplayedMonth(null);
+    } else {
+      // Select the clicked date
+      setSelectedDate({
+        ...currentDate,
+        month: displayedMonth,
+        day,
+        weekday: currentDate.weekday, // Will be recalculated by getWeekday
+      });
+    }
   };
 }

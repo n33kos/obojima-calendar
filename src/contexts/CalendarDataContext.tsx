@@ -7,10 +7,7 @@ import {
 } from "react";
 import { useCalendarData } from "../hooks/useCalendarData";
 import { getGistConfig } from "../config/gist.config";
-import {
-  createHandleDayClick,
-  createHandleReturnToToday,
-} from "../components/App/App.utils";
+import { createHandleDayClick } from "../components/App/App.utils";
 import type { CalendarDate, Month } from "../types";
 import type { CalendarDataContextValue } from "./CalendarDataContext.types";
 
@@ -47,12 +44,15 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
   // Handler for day click
   const handleDayClick = useMemo(() => {
     if (!data || !currentMonth) return undefined;
-    return createHandleDayClick(data.date, currentMonth, setSelectedDate);
+    return createHandleDayClick(data.date, currentMonth, setSelectedDate, setDisplayedMonth);
   }, [data, currentMonth]);
 
   // Handler to return to current date
   const handleReturnToToday = useMemo(() => {
-    return createHandleReturnToToday(setSelectedDate, setDisplayedMonth);
+    return () => {
+      setSelectedDate(null);
+      setDisplayedMonth(null);
+    };
   }, []);
 
   const value: CalendarDataContextValue = {

@@ -1,6 +1,8 @@
-@import '@/styles/variables.scss';
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
 
 .CurrentDate {
+  @include buttonReset;
   position: relative;
   text-align: center;
   color: $color-primary;
@@ -10,6 +12,23 @@
   display: flex;
   flex-direction: column;
   gap: clamp(0.25rem, 0.8vh, 1rem);
+  transition: all $transition-fast;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  outline-offset: 2px;
+
+  &:hover {
+    outline: 2px solid $color-accent;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+
+  &:active {
+    outline: none;
+  }
 }
 
 .DateDisplay {
@@ -39,29 +58,4 @@
 .TwelveHourTime {
   font-weight: $font-weight-medium;
   color: $color-text-secondary;
-}
-
-.TodayButton {
-  position: absolute;
-  top: -70%;
-  right: 0;
-  background: $color-accent;
-  color: white;
-  padding: clamp(0.25rem, 0.5vh, 1rem) clamp(0.5rem, 1vw, 2rem);
-  border-radius: $radius-md;
-  font-size: clamp(0.75rem, 1.2vw, 1rem);
-  font-weight: $font-weight-bold;
-  transition: all $transition-fast;
-  border: 2px solid $color-accent;
-
-  &:hover {
-    background: lighten($color-accent, 10%);
-    border-color: lighten($color-accent, 10%);
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: $shadow-md;
-  }
-
-  &:active {
-    transform: translateY(-50%) scale(0.98);
-  }
 }

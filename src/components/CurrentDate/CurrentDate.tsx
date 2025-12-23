@@ -2,16 +2,16 @@ import type { CurrentDateProps } from './CurrentDate.types';
 import { formatDateWithWeekday, formatTime, bellKnotTo12Hour } from '@/utils/calendar.utils';
 import styles from './CurrentDate.module.scss';
 
-export function CurrentDate({ date, time, isViewingToday = true, onReturnToToday }: CurrentDateProps) {
+export function CurrentDate({ date, time, onReturnToToday }: CurrentDateProps) {
   const twelveHourTime = bellKnotTo12Hour(time.bell, time.knot);
 
   return (
-    <div className={styles.CurrentDate}>
-      {!isViewingToday && onReturnToToday && (
-        <button className={styles.TodayButton} onClick={onReturnToToday}>
-          Return to Today
-        </button>
-      )}
+    <button
+      className={styles.CurrentDate}
+      onClick={onReturnToToday}
+      type="button"
+      aria-label="Return to current date"
+    >
       <div className={styles.DateDisplay}>
         {formatDateWithWeekday(date)}
       </div>
@@ -20,6 +20,6 @@ export function CurrentDate({ date, time, isViewingToday = true, onReturnToToday
         <span className={styles.Separator}>•</span>
         <span className={styles.TwelveHourTime}>{twelveHourTime}</span>
       </div>
-    </div>
+    </button>
   );
 }
