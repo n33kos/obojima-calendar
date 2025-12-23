@@ -26,8 +26,11 @@ A beautiful, Miyazaki/Zelda-inspired D&D party tracker featuring a custom calend
 npm install
 ```
 
-### 2. Create Your GitHub Gist
+### 2. Create Your GitHub Gist (Optional)
 
+**For testing/development:** The app will automatically use `public/default-data.json` if the Gist fetch fails, so you can skip this step initially and configure it later!
+
+**For production use:**
 1. Go to [gist.github.com](https://gist.github.com)
 2. Create a new **public** gist
 3. Name the file: `obojima-party-tracker.json`
@@ -40,12 +43,14 @@ Edit `src/App.tsx` and update the `GIST_CONFIG`:
 
 ```typescript
 const GIST_CONFIG = {
-  username: 'YOUR_GITHUB_USERNAME',
-  gistId: 'YOUR_GIST_ID', // From the gist URL
+  username: 'YOUR_GITHUB_USERNAME',  // Leave as-is to use local fallback
+  gistId: 'YOUR_GIST_ID',            // Leave as-is to use local fallback
   filename: 'obojima-party-tracker.json',
   refreshInterval: 60000, // Optional: auto-refresh every 60 seconds
 };
 ```
+
+💡 **Tip:** If Gist credentials are not configured or the fetch fails, the app automatically falls back to `/default-data.json` for local testing.
 
 ### 4. Run Development Server
 
@@ -65,7 +70,7 @@ The static files will be in the `dist/` folder, ready to upload to your web serv
 
 ## Updating Content
 
-To update the current date, time, events, or adventure log:
+### For Production (using Gist):
 
 1. Go to your Gist on GitHub
 2. Click "Edit"
@@ -74,6 +79,14 @@ To update the current date, time, events, or adventure log:
 5. The app will automatically fetch the changes (within the refresh interval)
 
 No redeployment needed!
+
+### For Development/Testing (using local file):
+
+1. Edit `public/default-data.json`
+2. Save the file
+3. Refresh your browser
+
+The app will use local data if the Gist fetch fails.
 
 ## Example Data Structure
 

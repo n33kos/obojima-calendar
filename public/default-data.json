@@ -1,0 +1,98 @@
+{
+  "currentDate": {
+    "year": 327,
+    "era": "AD",
+    "month": "Sep",
+    "day": 13
+  },
+  "currentTime": {
+    "bell": 3,
+    "knot": 2
+  },
+  "events": [
+    {
+      "id": "event-1",
+      "title": "Festival of Lanterns",
+      "year": 327,
+      "era": "AD",
+      "month": "Ock",
+      "day": 15,
+      "description": "Annual celebration in the town square. Lanterns are lit at dusk and floated down the river to honor ancestors.",
+      "isImportant": true
+    },
+    {
+      "id": "event-2",
+      "title": "Market Day",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 21,
+      "description": "Weekly market in Windwhisper Village",
+      "isImportant": false
+    }
+  ],
+  "adventureLog": [
+    {
+      "id": "session-2",
+      "sessionNumber": 2,
+      "title": "Secrets of the Shrine",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 11,
+      "summary": "The party returned to the ancient shrine ruins to investigate further. They deciphered ancient inscriptions that revealed the location of a hidden entrance to underground caverns.",
+      "highlights": [
+        "Deciphered the ancient runes using the Map Fragment",
+        "Helped the spirit of a lost child return home",
+        "Uncovered the entrance to the underground caverns"
+      ],
+      "npcsEncountered": [
+        "Spirit of Lost Child",
+        "Merchant Yumi",
+        "Scholar Akane"
+      ],
+      "locationsVisited": [
+        "Ancient Shrine Ruins",
+        "Spirit's Grove",
+        "Windwhisper Library"
+      ],
+      "itemsAcquired": [
+        "Rope (50 ft)",
+        "Torches (10)",
+        "Translation Notes"
+      ]
+    },
+    {
+      "id": "session-1",
+      "sessionNumber": 1,
+      "title": "The Journey Begins",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 10,
+      "summary": "Our heroes met in the village of Windwhisper and accepted a quest to investigate strange occurrences in the nearby forest. Elder Kaito spoke of shadows that moved against the wind and strange sounds echoing from ancient ruins.",
+      "highlights": [
+        "Met the mysterious Elder Kaito who spoke in riddles",
+        "Discovered ancient ruins hidden in the Whispering Woods",
+        "Fought off a pack of shadow wolves",
+        "Found a strange map fragment with symbols"
+      ],
+      "npcsEncountered": [
+        "Elder Kaito",
+        "Merchant Yumi",
+        "Guard Captain Hiro"
+      ],
+      "locationsVisited": [
+        "Windwhisper Village",
+        "The Whispering Woods",
+        "Ancient Shrine Ruins"
+      ],
+      "itemsAcquired": [
+        "Map Fragment",
+        "Silver Bell",
+        "Healing Potion (x3)",
+        "Shadow Wolf Pelt"
+      ]
+    }
+  ]
+}

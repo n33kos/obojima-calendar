@@ -8,26 +8,58 @@ import { getWeekday } from './calendar.utils';
 const GIST_RAW_URL_TEMPLATE = 'https://gist.githubusercontent.com/{username}/{gist_id}/raw/{filename}';
 
 /**
- * Fetch data from a GitHub Gist
+ * Fetch data from local fallback file
+ */
+async function fetchLocalData(): Promise<GistData> {
+  const response = await fetch('/default-data.json');
+
+  if (!response.ok) {
+    throw new Error('Failed to load local fallback data');
+  }
+
+  const data = await response.json();
+  return data as GistData;
+}
+
+/**
+ * Fetch data from a GitHub Gist with fallback to local file
  */
 export async function fetchGistData(
   username: string,
   gistId: string,
   filename: string = 'obojima-calendar.json'
 ): Promise<GistData> {
-  const url = GIST_RAW_URL_TEMPLATE
-    .replace('{username}', username)
-    .replace('{gist_id}', gistId)
-    .replace('{filename}', filename);
+  // Try to fetch from GitHub Gist first
+  try {
+    const url = GIST_RAW_URL_TEMPLATE
+      .replace('{username}', username)
+      .replace('{gist_id}', gistId)
+      .replace('{filename}', filename);
 
-  const response = await fetch(url);
+    console.log('Attempting to fetch from Gist:', url);
+    const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch gist data: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Gist fetch failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    console.log('✓ Successfully loaded data from GitHub Gist');
+    return data as GistData;
+  } catch (error) {
+    // If Gist fetch fails, fall back to local file
+    console.warn('Failed to fetch from Gist, falling back to local data:', error);
+    console.log('Loading from /default-data.json...');
+
+    try {
+      const localData = await fetchLocalData();
+      console.log('✓ Successfully loaded local fallback data');
+      return localData;
+    } catch (localError) {
+      console.error('Failed to load local fallback data:', localError);
+      throw new Error('Failed to load data from both Gist and local fallback');
+    }
   }
-
-  const data = await response.json();
-  return data as GistData;
 }
 
 /**
