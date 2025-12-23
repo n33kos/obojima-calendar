@@ -187,3 +187,73 @@
     font-style: italic;
   }
 }
+
+.veilDayContainer {
+  display: flex;
+  justify-content: center;
+  padding: clamp(1rem, 3vh, 3rem);
+}
+
+.veilDayButton {
+  padding: clamp(1.5rem, 4vh, 4rem);
+  text-align: center;
+  background: linear-gradient(135deg, lighten($color-primary, 40%), lighten($color-secondary, 40%));
+  border-radius: $radius-lg;
+  border: 2px solid $color-border;
+  cursor: pointer;
+  transition: all $transition-base;
+  min-width: 200px;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: $shadow-xl;
+    border-color: $color-accent;
+  }
+
+  &.isCurrentDay {
+    border-color: $color-current-day;
+    border-width: 3px;
+    background: linear-gradient(135deg, $color-current-day, lighten($color-current-day, 20%));
+    color: white;
+
+    .veilDayTitle,
+    .veilDayDescription {
+      color: white;
+    }
+  }
+
+  &.isSelectedDay {
+    border-color: $color-accent;
+    border-width: 3px;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+  }
+
+  &.hasEvent::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: $color-event;
+    border-radius: 50%;
+  }
+
+  &.hasImportantEvent::after {
+    background: $color-important;
+  }
+
+  .veilDayTitle {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: clamp(0.5rem, 1vh, 1rem);
+  }
+
+  .veilDayDescription {
+    font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+    color: $color-text-secondary;
+    font-style: italic;
+  }
+}

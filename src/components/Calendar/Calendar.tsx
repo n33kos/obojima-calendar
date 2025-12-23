@@ -13,7 +13,7 @@ export function Calendar({
   onMonthChange,
 }: CalendarProps) {
   const monthInfo = getMonthInfo(displayedMonth);
-  const weeks = useMemo(() => generateMonthGridByWeeks(), []);
+  const weeks = useMemo(() => generateMonthGridByWeeks(displayedMonth), [displayedMonth]);
 
   // Create a map of day -> events for quick lookup
   const eventsByDay = useMemo(() => {
@@ -51,19 +51,56 @@ export function Calendar({
   };
 
   if (isVeilDay(displayedMonth)) {
+    const dayEvents = eventsByDay.get(1) || [];
+    const hasEvent = dayEvents.length > 0;
+    const hasImportantEvent = dayEvents.some((e) => e.isImportant);
+    const isCurrentDay = currentDate.month === displayedMonth && currentDate.day === 1;
+    const isSelectedDay = selectedDate?.month === displayedMonth && selectedDate?.day === 1;
+
     return (
       <div className={styles.calendar}>
         <div className={styles.header}>
-          <h2 className={styles.monthName}>Veil Day</h2>
-          <div className={styles.yearEra}>
-            {currentDate.era} {currentDate.year}
+          <div className={styles.monthNavigation}>
+            <button
+              className={styles.navButton}
+              onClick={handlePrevMonth}
+              aria-label="Previous month"
+            >
+              ‹
+            </button>
+            <div className={styles.monthTitle}>
+              <h2 className={styles.monthName}>Veil Day</h2>
+              <div className={styles.yearEra}>
+                {currentDate.era} {currentDate.year}
+              </div>
+            </div>
+            <button
+              className={styles.navButton}
+              onClick={handleNextMonth}
+              aria-label="Next month"
+            >
+              ›
+            </button>
           </div>
+          {monthInfo && <div className={styles.monthNotes}>{monthInfo.notes}</div>}
         </div>
-        <div className={styles.veilDay}>
-          <div className={styles.veilDayTitle}>Veil Day</div>
-          <div className={styles.veilDayDescription}>
-            The between-day. A time for festivals, reflection, and closing of the year.
-          </div>
+        <div className={styles.veilDayContainer}>
+          <button
+            className={`${styles.veilDayButton} ${isCurrentDay ? styles.isCurrentDay : ''} ${
+              isSelectedDay ? styles.isSelectedDay : ''
+            } ${hasEvent ? styles.hasEvent : ''} ${
+              hasImportantEvent ? styles.hasImportantEvent : ''
+            }`}
+            onClick={() => handleDayClick(1)}
+            aria-label={`Veil Day${isCurrentDay ? ' (current)' : ''}${
+              isSelectedDay ? ' (selected)' : ''
+            }${hasEvent ? `, ${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}` : ''}`}
+          >
+            <div className={styles.veilDayTitle}>Veil Day</div>
+            <div className={styles.veilDayDescription}>
+              The between-day
+            </div>
+          </button>
         </div>
       </div>
     );

@@ -101,14 +101,15 @@ function App() {
 
       <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 10deg)` }}>
         <div className={styles.contentOverlay}>
-          <header className={styles.header}>
-            <CurrentDate date={data.date} time={data.time} />
-            {!isViewingToday && (
-              <button className={styles.todayButton} onClick={handleReturnToToday}>
-                Return to Today
-              </button>
-            )}
-          </header>
+          {!isViewingToday && (
+            <button className={styles.todayButton} onClick={handleReturnToToday}>
+              Return to Today
+            </button>
+          )}
+
+          <CurrentDate date={data.date} time={data.time} />
+
+          <TimeOfDay time={data.time} />
           
           <Calendar
             currentDate={data.date}
@@ -118,8 +119,6 @@ function App() {
             onDateClick={handleDayClick}
             onMonthChange={setDisplayedMonth}
           />
-
-          <TimeOfDay time={data.time} />
 
           <AdventureLog
             entries={data.adventureLog || []}

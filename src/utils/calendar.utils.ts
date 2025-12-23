@@ -36,6 +36,7 @@ export const WEEKS_PER_MONTH = 4;
 export const MONTHS_PER_YEAR = 13;
 export const BELLS_PER_DAY = 8;
 export const KNOTS_PER_BELL = 6;
+export const VELL_DAYS = 1; // Vell only has 1 day (Veil Day)
 
 /**
  * Get month info by name
@@ -119,23 +120,38 @@ export function formatDateWithWeekday(date: CalendarDate): string {
 }
 
 /**
- * Check if a date is Veil Day
+ * Check if a date is Veil Day (or Vell month which only has 1 day)
  */
 export function isVeilDay(month: Month | 'Veil'): boolean {
-  return month === 'Veil';
+  return month === 'Veil' || month === 'Vell';
 }
 
 /**
- * Generate calendar grid for a month (array of day numbers 1-28)
+ * Get number of days in a month
  */
-export function generateMonthGrid(): number[] {
-  return Array.from({ length: DAYS_PER_MONTH }, (_, i) => i + 1);
+export function getDaysInMonth(month: Month | 'Veil'): number {
+  return isVeilDay(month) ? VELL_DAYS : DAYS_PER_MONTH;
+}
+
+/**
+ * Generate calendar grid for a month (array of day numbers)
+ */
+export function generateMonthGrid(month?: Month | 'Veil'): number[] {
+  const days = month ? getDaysInMonth(month) : DAYS_PER_MONTH;
+  return Array.from({ length: days }, (_, i) => i + 1);
 }
 
 /**
  * Generate calendar grid grouped by weeks
  */
-export function generateMonthGridByWeeks(): number[][] {
+export function generateMonthGridByWeeks(month?: Month | 'Veil'): number[][] {
+  const days = month ? getDaysInMonth(month) : DAYS_PER_MONTH;
+
+  // For Vell (1 day), return single array with 1 element
+  if (days === 1) {
+    return [[1]];
+  }
+
   const weeks: number[][] = [];
   for (let week = 0; week < WEEKS_PER_MONTH; week++) {
     const weekDays: number[] = [];
