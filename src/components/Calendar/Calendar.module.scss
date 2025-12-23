@@ -13,6 +13,45 @@
   text-align: center;
 }
 
+.monthNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.navButton {
+  background: $color-background;
+  border: 2px solid $color-border;
+  border-radius: $radius-md;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-xxl;
+  color: $color-primary;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-accent;
+    color: white;
+    border-color: $color-accent;
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.monthTitle {
+  flex: 1;
+  text-align: center;
+}
+
 .monthName {
   font-size: $font-size-xxl;
   color: $color-primary;
@@ -85,6 +124,18 @@
 
     &:hover {
       background: lighten($color-current-day, 5%);
+    }
+  }
+
+  &.isSelectedDay {
+    background: $color-accent;
+    color: white;
+    border-color: darken($color-accent, 10%);
+    font-weight: $font-weight-bold;
+    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
+
+    &:hover {
+      background: lighten($color-accent, 5%);
     }
   }
 

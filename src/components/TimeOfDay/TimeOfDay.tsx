@@ -44,7 +44,7 @@ export function TimeOfDay({ time }: TimeOfDayProps) {
         {Array.from({ length: BELLS_PER_DAY }, (_, i) => (
           <div
             key={i}
-            className={`${styles.bellIndicator} ${i + 1 === bell ? styles.active : ''}`}
+            className={`${styles.bellIndicator} ${i + 1 <= bell ? styles.active : ''}`}
             aria-label={`Bell ${i + 1}${i + 1 === bell ? ' (current)' : ''}`}
           />
         ))}
@@ -54,7 +54,7 @@ export function TimeOfDay({ time }: TimeOfDayProps) {
         {Array.from({ length: KNOTS_PER_BELL }, (_, i) => (
           <div
             key={i}
-            className={`${styles.knotIndicator} ${i === knot ? styles.active : ''}`}
+            className={`${styles.knotIndicator} ${i <= knot ? styles.active : ''}`}
             aria-label={`Knot ${i}${i === knot ? ' (current)' : ''}`}
           />
         ))}

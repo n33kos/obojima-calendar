@@ -81,13 +81,10 @@ export function formatTime(bell: number, knot: number): string {
  * Bell 1 = 3:00 AM, Bell 4 = 12:00 PM (noon)
  */
 export function bellKnotTo12Hour(bell: number, knot: number): string {
-  // Calculate total hours from midnight
-  // Bell 1 = 3 AM, Bell 2 = 6 AM, Bell 3 = 9 AM, Bell 4 = 12 PM, etc.
-  const totalHours = bell * 3; // Each bell is 3 hours, Bell 1 starts at 3 AM
-  const totalMinutes = knot * 30; // Each knot is 30 minutes
-
-  let hours = totalHours;
-  const minutes = totalMinutes;
+  const totalMinutes = knot * 30 + (bell * 180); // Each knot is 30 minutes, Each Bell is 180 minutes
+  
+  const hours = Math.floor(totalMinutes / 60) % 24;
+  const minutes = totalMinutes % 60;
 
   // Determine AM/PM
   const period = hours >= 12 ? 'PM' : 'AM';
@@ -119,15 +116,6 @@ export function formatDateWithWeekday(date: CalendarDate): string {
     return `${date.era} ${date.year}, Veil Day`;
   }
   return `${date.weekday}, ${date.month} ${date.day}, ${date.era} ${date.year}`;
-}
-
-/**
- * Format a calendar date with weekday and time
- */
-export function formatDateWithTime(date: CalendarDate, bell: number, knot: number): string {
-  const dateStr = formatDateWithWeekday(date);
-  const timeStr = formatTime(bell, knot);
-  return `${dateStr} - Bell ${timeStr}`;
 }
 
 /**
