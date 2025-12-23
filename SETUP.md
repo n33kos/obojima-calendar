@@ -20,16 +20,22 @@ npm install
 
 ## Step 3: Configure Your App
 
-Edit `src/App.tsx` and update these values:
+Create a `.env` file in the project root by copying `.env.example`:
 
-```typescript
-const GIST_CONFIG = {
-  username: 'YOUR_GITHUB_USERNAME',  // Replace this
-  gistId: 'YOUR_GIST_ID',            // Replace this
-  filename: 'obojima-party-tracker.json',
-  refreshInterval: 60000,             // Optional: auto-refresh every 60s
-};
+```bash
+cp .env.example .env
 ```
+
+Then edit `.env` and update these values:
+
+```bash
+VITE_GIST_USERNAME=YOUR_GITHUB_USERNAME
+VITE_GIST_ID=YOUR_GIST_ID
+VITE_GIST_FILENAME=obojima-party-tracker.json
+VITE_GIST_REFRESH_INTERVAL=60000
+```
+
+**Important:** The `.env` file is git-ignored for security, so your credentials won't be committed to the repository.
 
 ## Step 4: Run Development Server
 
@@ -90,7 +96,8 @@ Everything else (events, adventureLog) is optional!
 **Nothing displays / blank page**
 - Open browser developer console (F12)
 - Check for errors
-- Verify GIST_CONFIG is set correctly in `src/App.tsx`
+- Verify your `.env` file exists and has the correct values
+- Restart the dev server after changing `.env` files
 
 **Build errors**
 - Run `npm install` again

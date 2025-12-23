@@ -8,12 +8,12 @@ import { createHandleDayClick, createHandleReturnToToday } from './App.utils';
 import type { Month, CalendarDate } from './types';
 import styles from './App.module.scss';
 
-// Configuration - Update these with your Gist details
+// Configuration - Loaded from environment variables (.env file)
 const GIST_CONFIG = {
-  username: 'n33kos',
-  gistId: 'c0f12ac026aae6e7681c4a1d4385ba62',
-  filename: 'obojima-party-tracker.json',
-  refreshInterval: 60000, // Refresh every 60 seconds (optional)
+  username: import.meta.env.VITE_GIST_USERNAME || '',
+  gistId: import.meta.env.VITE_GIST_ID || '',
+  filename: import.meta.env.VITE_GIST_FILENAME || 'obojima-party-tracker.json',
+  refreshInterval: Number(import.meta.env.VITE_GIST_REFRESH_INTERVAL) || 60000,
 };
 
 // Background image dimensions (original size)

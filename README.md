@@ -39,18 +39,22 @@ npm install
 
 ### 3. Configure the App
 
-Edit `src/App.tsx` and update the `GIST_CONFIG`:
+Create a `.env` file in the project root by copying `.env.example`:
 
-```typescript
-const GIST_CONFIG = {
-  username: 'YOUR_GITHUB_USERNAME',  // Leave as-is to use local fallback
-  gistId: 'YOUR_GIST_ID',            // Leave as-is to use local fallback
-  filename: 'obojima-party-tracker.json',
-  refreshInterval: 60000, // Optional: auto-refresh every 60 seconds
-};
+```bash
+cp .env.example .env
 ```
 
-💡 **Tip:** If Gist credentials are not configured or the fetch fails, the app automatically falls back to `/default-data.json` for local testing.
+Then edit `.env` and update your Gist credentials:
+
+```bash
+VITE_GIST_USERNAME=YOUR_GITHUB_USERNAME
+VITE_GIST_ID=YOUR_GIST_ID
+VITE_GIST_FILENAME=obojima-party-tracker.json
+VITE_GIST_REFRESH_INTERVAL=60000
+```
+
+💡 **Tip:** The `.env` file is git-ignored for security. If Gist credentials are not configured or the fetch fails, the app automatically falls back to `/default-data.json` for local testing.
 
 ### 4. Run Development Server
 
