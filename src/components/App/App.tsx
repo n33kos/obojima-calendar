@@ -15,9 +15,11 @@ function App() {
     refetch,
     selectedDate,
     currentMonth,
+    currentYear,
     handleDayClick,
     handleReturnToToday,
     setDisplayedMonth,
+    setDisplayedYear,
   } = useCalendarDataContext();
 
   const backgroundScale = useBackgroundScale();
@@ -55,15 +57,17 @@ function App() {
             />
           )}
 
-          {!loading && !error && data && currentMonth && handleDayClick && (
+          {!loading && !error && data && currentMonth && currentYear && handleDayClick && (
             <>
               <Calendar
                 currentDate={data.date}
                 displayedMonth={currentMonth}
+                displayedYear={currentYear}
                 selectedDate={selectedDate}
                 events={data.events}
                 onDateClick={handleDayClick}
                 onMonthChange={setDisplayedMonth}
+                onYearChange={setDisplayedYear}
               />
 
               <div className={styles.Sidebar}>

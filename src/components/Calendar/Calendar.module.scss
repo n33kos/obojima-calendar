@@ -19,7 +19,7 @@
 }
 
 .NavButton {
-  border: 2px solid $color-border;
+  border: 2px solid rgba($color-border, 0.3);
   border-radius: $radius-md;
   width: 40px;
   height: 40px;
@@ -32,14 +32,8 @@
   transition: all $transition-fast;
 
   &:hover {
-    background: $color-accent;
-    color: white;
-    border-color: $color-accent;
-    transform: scale(1.1);
-  }
-
-  &:active {
-    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: $shadow-lg;
   }
 }
 

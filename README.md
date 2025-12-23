@@ -31,6 +31,7 @@ npm install
 **For testing/development:** The app will automatically use `public/default-data.json` if the Gist fetch fails, so you can skip this step initially and configure it later!
 
 **For production use:**
+
 1. Go to [gist.github.com](https://gist.github.com)
 2. Create a new **public** gist
 3. Name the file: `obojima-party-tracker.json`
@@ -146,6 +147,7 @@ Create a file called `obojima-party-tracker.json` in your Gist:
 ## Calendar System Reference
 
 ### Months (13)
+
 1. Jan - cold clarity, new routes
 2. Feb - thaw, first green
 3. Mar - winds, restlessness
@@ -163,6 +165,7 @@ Create a file called `obojima-party-tracker.json` in your Gist:
 **Veil Day** - Special between-day after Vell 28
 
 ### Weekdays (7)
+
 - Tide Day
 - Leaf Day
 - Bell Day
@@ -172,11 +175,13 @@ Create a file called `obojima-party-tracker.json` in your Gist:
 - Rest Day
 
 ### Time System
+
 - 8 Bells per day (each = 3 hours)
 - 6 Knots per Bell (each = 30 minutes)
 - Format: Bell:Knot (e.g., "3:2")
 
 ### Eras
+
 - **AF** - First Age
 - **AN** - Nakudama Age
 - **AH** - Human Age
@@ -224,6 +229,7 @@ All colors, spacing, and typography are defined in `src/styles/variables.scss`. 
 ### Refresh Interval
 
 Change `refreshInterval` in `GIST_CONFIG` (in milliseconds):
+
 - `0` - No auto-refresh
 - `60000` - Every minute
 - `300000` - Every 5 minutes
@@ -233,6 +239,7 @@ Change `refreshInterval` in `GIST_CONFIG` (in milliseconds):
 Upload the contents of the `dist/` folder to your web server after running `npm run build`.
 
 Works great with:
+
 - Any static file hosting (Apache, Nginx, etc.)
 - GitHub Pages
 - Netlify
@@ -241,3 +248,7 @@ Works great with:
 ## License
 
 MIT
+
+## Todo
+
+- Allow changing between different era systems (AD, AH, AF, LW)

@@ -23,14 +23,15 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
   const gistConfig = getGistConfig();
   const { data, loading, error, refetch } = useCalendarData(gistConfig);
 
-  // State for selected date and displayed month
+  // State for selected date, displayed month, and displayed year
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
   const [displayedMonth, setDisplayedMonth] = useState<Month | null>(null);
+  const [displayedYear, setDisplayedYear] = useState<number | null>(null);
 
-  // Check if viewing current month/day
+  // Check if viewing current month/day/year
   const isViewingToday = useMemo(() => {
-    return !selectedDate && !displayedMonth;
-  }, [selectedDate, displayedMonth]);
+    return !selectedDate && !displayedMonth && !displayedYear;
+  }, [selectedDate, displayedMonth, displayedYear]);
 
   // Initialize displayed month to current month on first load
   const currentMonth = useMemo(() => {
@@ -40,6 +41,12 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
       (data.date.month === "Veil" ? "Vell" : (data.date.month as Month))
     );
   }, [data, displayedMonth]);
+
+  // Initialize displayed year to current year on first load
+  const currentYear = useMemo(() => {
+    if (!data) return null;
+    return displayedYear || data.date.year;
+  }, [data, displayedYear]);
 
   // Handler for day click
   const handleDayClick = useMemo(() => {
@@ -52,6 +59,7 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
     return () => {
       setSelectedDate(null);
       setDisplayedMonth(null);
+      setDisplayedYear(null);
     };
   }, []);
 
@@ -64,8 +72,11 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
     setSelectedDate,
     displayedMonth,
     setDisplayedMonth,
+    displayedYear,
+    setDisplayedYear,
     isViewingToday,
     currentMonth,
+    currentYear,
     handleDayClick,
     handleReturnToToday,
   };
