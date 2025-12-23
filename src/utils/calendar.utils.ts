@@ -78,11 +78,12 @@ export function formatTime(bell: number, knot: number): string {
 /**
  * Convert Bell:Knot to 12-hour time
  * Each Bell = 3 hours, each Knot = 30 minutes
- * Bell 1 = midnight (00:00)
+ * Bell 1 = 3:00 AM, Bell 4 = 12:00 PM (noon)
  */
 export function bellKnotTo12Hour(bell: number, knot: number): string {
-  // Calculate total hours from midnight (Bell 1 = 0 hours)
-  const totalHours = (bell - 1) * 3; // Each bell is 3 hours
+  // Calculate total hours from midnight
+  // Bell 1 = 3 AM, Bell 2 = 6 AM, Bell 3 = 9 AM, Bell 4 = 12 PM, etc.
+  const totalHours = bell * 3; // Each bell is 3 hours, Bell 1 starts at 3 AM
   const totalMinutes = knot * 30; // Each knot is 30 minutes
 
   let hours = totalHours;
@@ -92,7 +93,7 @@ export function bellKnotTo12Hour(bell: number, knot: number): string {
   const period = hours >= 12 ? 'PM' : 'AM';
 
   // Convert to 12-hour format
-  const displayHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+  const displayHours = hours === 12 ? 12 : hours > 12 ? hours - 12 : hours;
 
   // Format with leading zeros for minutes
   const displayMinutes = minutes.toString().padStart(2, '0');
