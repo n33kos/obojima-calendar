@@ -102,14 +102,6 @@
   display: flex;
   align-items: center;
   gap: $spacing-xs;
-
-  &::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    background: $color-secondary;
-    border-radius: 50%;
-  }
 }
 
 .list {

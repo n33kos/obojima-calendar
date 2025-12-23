@@ -6,7 +6,7 @@
 }
 
 .header {
-  margin-bottom: $spacing-lg;
+  margin-bottom: $spacing-sm;
   text-align: center;
 }
 
@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: space-between;
   gap: $spacing-md;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
 }
 
 .navButton {
@@ -102,43 +102,42 @@
   cursor: pointer;
   position: relative;
 
+  &:focus-visible,
+  &:active {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
   &:hover {
-    background: $color-highlight;
-    border-color: $color-accent;
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
-    box-shadow: $shadow-md;
+    box-shadow: $shadow-lg;
   }
 
   &.isCurrentDay {
-    background: $color-primary;
+    background: darken($color-primary, 15%);
     color: white;
-    border-color: darken($color-current-day, 10%);
+    border: 1px solid rgba($color-border, 0.6);
     font-weight: $font-weight-bold;
 
     &:hover {
-      background: lighten($color-current-day, 5%);
+      border: 1px solid rgba($color-border, 0.9);
     }
   }
 
   &.isSelectedDay {
-    background: $color-accent;
-    color: white;
-    border-color: darken($color-accent, 10%);
+    border-color: darken($color-primary, 10%);
     font-weight: $font-weight-bold;
-    box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
-
-    &:hover {
-      background: lighten($color-accent, 5%);
-    }
+    box-shadow: $shadow-lg;
   }
 
   &.hasEvent {
     &::after {
       content: '';
       position: absolute;
-      bottom: 4px;
-      width: 6px;
-      height: 6px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
       background: $color-event;
       border-radius: 50%;
     }

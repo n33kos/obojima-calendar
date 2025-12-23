@@ -43,9 +43,8 @@
 
 .todayButton {
   position: absolute;
-  top: 50%;
+  top: -70%;
   right: 0;
-  transform: translateY(-50%);
   background: $color-accent;
   color: white;
   padding: clamp(0.25rem, 0.5vh, 1rem) clamp(0.5rem, 1vw, 2rem);
