@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@import "@/styles/variables.scss";
 
 .Calendar {
   position: relative;
@@ -101,39 +101,29 @@
   transition: all $transition-fast;
   cursor: pointer;
   position: relative;
-
-  &:focus-visible,
-  &:active {
-    outline: 2px solid $color-primary;
-    outline-offset: 2px;
-  }
+  outline: none !important;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
     box-shadow: $shadow-lg;
   }
 
   &.Day__IsCurrentDay {
-    background: darken($color-primary, 15%);
-    color: white;
+    background: rgba($color-primary, 0.15);
     border: 1px solid rgba($color-border, 0.6);
     font-weight: $font-weight-bold;
-
-    &:hover {
-      border: 1px solid rgba($color-border, 0.9);
-    }
   }
 
   &.Day__IsSelectedDay {
-    border-color: darken($color-primary, 10%);
+    border-color: $color-primary;
     font-weight: $font-weight-bold;
     box-shadow: $shadow-lg;
+    transform: translateY(-2px);
   }
 
   &.Day__HasEvent {
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 6px;
       width: 8px;
@@ -163,29 +153,6 @@
   line-height: 1;
 }
 
-.VeilDay {
-  grid-column: 1 / -1;
-  margin-top: $spacing-md;
-  padding: $spacing-lg;
-  background: linear-gradient(135deg, lighten($color-primary, 40%), lighten($color-secondary, 40%));
-  border: 2px solid $color-accent;
-  border-radius: $radius-lg;
-  text-align: center;
-  box-shadow: $shadow-md;
-
-  .VeilDayTitle {
-    font-size: $font-size-xl;
-    color: $color-primary;
-    margin-bottom: $spacing-xs;
-  }
-
-  .VeilDayDescription {
-    font-size: $font-size-sm;
-    color: $color-text-secondary;
-    font-style: italic;
-  }
-}
-
 .VeilDayContainer {
   display: flex;
   justify-content: center;
@@ -195,7 +162,11 @@
 .VeilDayButton {
   padding: clamp(1.5rem, 4vh, 4rem);
   text-align: center;
-  background: linear-gradient(135deg, lighten($color-primary, 40%), lighten($color-secondary, 40%));
+  background: linear-gradient(
+    135deg,
+    lighten($color-primary, 40%),
+    lighten($color-secondary, 40%)
+  );
   border-radius: $radius-lg;
   border: 2px solid $color-border;
   cursor: pointer;
@@ -212,7 +183,11 @@
   &.VeilDayButton__IsCurrentDay {
     border-color: $color-current-day;
     border-width: 3px;
-    background: linear-gradient(135deg, $color-current-day, lighten($color-current-day, 20%));
+    background: linear-gradient(
+      135deg,
+      $color-current-day,
+      lighten($color-current-day, 20%)
+    );
     color: white;
 
     .VeilDayTitle,
@@ -228,7 +203,7 @@
   }
 
   &.VeilDayButton__HasEvent::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 8px;
     right: 8px;

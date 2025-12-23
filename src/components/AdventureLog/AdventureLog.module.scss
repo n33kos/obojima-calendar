@@ -5,12 +5,6 @@
   position: relative;
 }
 
-.Content {
-  @include hiddenScrollbar;
-  height: 310px;
-  max-height: 100%;
-}
-
 .Header {
   font-size: $font-size-lg;
   color: $color-primary;
@@ -22,6 +16,9 @@
 }
 
 .Content {
+  @include hiddenScrollbar;
+  height: 310px;
+  max-height: 100%;
   border: 1px solid $color-text-muted;
   padding: $spacing-md;
   border-radius: $radius-md;
@@ -167,13 +164,13 @@
 
 .Event {
   background: $color-background;
-  border: 2px solid $color-accent;
+  border: 2px solid $color-event;
   border-radius: $radius-md;
   padding: $spacing-md;
   transition: all $transition-base;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba($color-accent, 0.2);
+    box-shadow: 0 2px 8px rgba($color-event, 0.2);
     transform: translateY(-2px);
   }
 }
