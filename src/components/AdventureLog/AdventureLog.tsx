@@ -1,9 +1,10 @@
 import { useEffect, useRef, useMemo } from 'react';
 import type { AdventureLogProps } from './AdventureLog.types';
-import { formatDateWithWeekday, getMonthInfo } from '@/utils/calendar.utils';
+import { formatDateWithWeekday } from '@/utils/calendar.utils';
+import { findNearestEntry, filterEventsByDate } from './AdventureLog.utils';
 import styles from './AdventureLog.module.scss';
 
-export function AdventureLog({ entries, selectedDate, currentDate }: AdventureLogProps) {
+export function AdventureLog({ entries, events, selectedDate, currentDate }: AdventureLogProps) {
   const entryRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   // Sort entries by session number descending (most recent first)
@@ -11,35 +12,13 @@ export function AdventureLog({ entries, selectedDate, currentDate }: AdventureLo
 
   // Find the nearest entry to the selected date
   const nearestEntry = useMemo(() => {
-    if (entries.length === 0) return null;
-
-    // Convert date to a comparable number (year * 10000 + monthNum * 100 + day)
-    const dateToNumber = (date: typeof selectedDate) => {
-      const monthInfo = getMonthInfo(date.month as any);
-      const monthNum = monthInfo?.number || 0;
-      return date.year * 10000 + monthNum * 100 + date.day;
-    };
-
-    const selectedNum = dateToNumber(selectedDate);
-
-    // Find entries on or before the selected date
-    const pastEntries = entries.filter((entry) => {
-      const entryNum = dateToNumber(entry.date);
-      return entryNum <= selectedNum;
-    });
-
-    // Return the most recent past entry (highest session number)
-    if (pastEntries.length > 0) {
-      return pastEntries.reduce((latest, current) =>
-        current.sessionNumber > latest.sessionNumber ? current : latest
-      );
-    }
-
-    // If no past entries, return the oldest entry
-    return entries.reduce((oldest, current) =>
-      current.sessionNumber < oldest.sessionNumber ? current : oldest
-    );
+    return findNearestEntry(entries, selectedDate);
   }, [entries, selectedDate]);
+
+  // Filter events for the selected date
+  const dateEvents = useMemo(() => {
+    return filterEventsByDate(events, selectedDate);
+  }, [events, selectedDate]);
 
   // Scroll to nearest entry when selected date changes
   useEffect(() => {
@@ -75,6 +54,32 @@ export function AdventureLog({ entries, selectedDate, currentDate }: AdventureLo
           </div>
         )}
       </h2>
+
+      {dateEvents.length > 0 && (
+        <div className={styles.eventsSection}>
+          <h3 className={styles.eventsSectionTitle}>
+            Events on {formatDateWithWeekday(selectedDate)}
+          </h3>
+          <div className={styles.eventsList}>
+            {dateEvents.map((event) => (
+              <div
+                key={event.id}
+                className={`${styles.event} ${event.isImportant ? styles.importantEvent : ''}`}
+              >
+                <div className={styles.eventHeader}>
+                  <h4 className={styles.eventTitle}>{event.title}</h4>
+                  {event.isImportant && (
+                    <span className={styles.importantBadge}>Important</span>
+                  )}
+                </div>
+                {event.description && (
+                  <p className={styles.eventDescription}>{event.description}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className={styles.entries}>
         {sortedEntries.map((entry) => {

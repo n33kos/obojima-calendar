@@ -1,9 +1,7 @@
 @import '@/styles/variables.scss';
 
 .adventureLog {
-  background: $color-surface;
   border-radius: $radius-lg;
-  padding: $spacing-lg;
   box-shadow: $shadow-lg;
   border: 2px solid $color-border;
   max-height: 600px;
@@ -55,6 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
+  padding: $spacing-lg;
 }
 
 .entry {
@@ -208,4 +207,79 @@
   padding: $spacing-xxl;
   color: $color-text-muted;
   font-style: italic;
+}
+
+// Events Section
+.eventsSection {
+  margin-bottom: $spacing-lg;
+  padding-bottom: $spacing-lg;
+  border-bottom: 2px solid $color-border;
+}
+
+.eventsSectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin-bottom: $spacing-md;
+  text-align: center;
+}
+
+.eventsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.event {
+  background: $color-background;
+  border: 2px solid $color-accent;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba($color-accent, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.importantEvent {
+  border-color: $color-important;
+  background: lighten($color-important, 45%);
+  border-width: 3px;
+  box-shadow: 0 0 0 2px rgba($color-important, 0.1);
+}
+
+.eventHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xs;
+}
+
+.eventTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin: 0;
+}
+
+.importantBadge {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: $color-background;
+  background: $color-important;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.eventDescription {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.5;
+  margin: 0;
 }

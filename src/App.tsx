@@ -1,26 +1,40 @@
 import { useState, useMemo } from 'react';
 import { useCalendarData } from './hooks/useCalendarData';
+import { useBackgroundScale } from './hooks/useBackgroundScale';
 import { Calendar } from './components/Calendar/Calendar';
 import { TimeOfDay } from './components/TimeOfDay/TimeOfDay';
 import { AdventureLog } from './components/AdventureLog/AdventureLog';
 import { formatDateWithWeekday, formatTime } from './utils/calendar.utils';
+import { createHandleDayClick, createHandleReturnToToday } from './App.utils';
 import type { Month, CalendarDate } from './types';
 import styles from './App.module.scss';
 
 // Configuration - Update these with your Gist details
 const GIST_CONFIG = {
-  username: 'YOUR_GITHUB_USERNAME',
-  gistId: 'YOUR_GIST_ID',
+  username: 'n33kos',
+  gistId: 'c0f12ac026aae6e7681c4a1d4385ba62',
   filename: 'obojima-party-tracker.json',
   refreshInterval: 60000, // Refresh every 60 seconds (optional)
 };
 
+// Background image dimensions (original size)
+const BACKGROUND_IMAGE_WIDTH = 1536;
+const BACKGROUND_IMAGE_HEIGHT = 1024;
+
 function App() {
   const { data, loading, error, refetch } = useCalendarData(GIST_CONFIG);
 
-  // State for selected date and displayed month
+  // Calculate scale factor to match background image
+  const backgroundScale = useBackgroundScale(BACKGROUND_IMAGE_WIDTH, BACKGROUND_IMAGE_HEIGHT);
+
+  // State for selected date and displayed month - must be declared before any conditional returns
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
   const [displayedMonth, setDisplayedMonth] = useState<Month | null>(null);
+
+  // Check if viewing current month/day - must be declared before conditional returns
+  const isViewingToday = useMemo(() => {
+    return !selectedDate && !displayedMonth;
+  }, [selectedDate, displayedMonth]);
 
   if (loading) {
     return (
@@ -76,71 +90,54 @@ function App() {
   const currentMonth = displayedMonth || (data.date.month === 'Veil' ? 'Vell' : data.date.month as Month);
 
   // Handler for day click
-  const handleDayClick = (day: number) => {
-    setSelectedDate({
-      ...data.date,
-      month: currentMonth,
-      day,
-      weekday: data.date.weekday, // Will be recalculated by getWeekday
-    });
-  };
+  const handleDayClick = createHandleDayClick(data.date, currentMonth, setSelectedDate);
 
   // Handler to return to current date
-  const handleReturnToToday = () => {
-    setSelectedDate(null);
-    setDisplayedMonth(null);
-  };
-
-  // Check if viewing current month/day
-  const isViewingToday = useMemo(() => {
-    return !selectedDate && !displayedMonth;
-  }, [selectedDate, displayedMonth]);
+  const handleReturnToToday = createHandleReturnToToday(setSelectedDate, setDisplayedMonth);
 
   return (
     <div className={styles.app}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.currentDate}>
-            <div>
-              {formatDateWithWeekday(data.date)}
-            </div>
-            <div>
-              Bell {formatTime(data.time.bell, data.time.knot)}
-            </div>
-          </div>
-          {!isViewingToday && (
-            <button className={styles.todayButton} onClick={handleReturnToToday}>
-              Return to Today
-            </button>
-          )}
-        </header>
+      <img src="/background.png" alt="scribe's desk background" className={styles.backgroundImage} />
 
-        <div className={styles.grid}>
-          <div className={styles.leftColumn}>
-            <Calendar
-              currentDate={data.date}
-              displayedMonth={currentMonth}
-              selectedDate={selectedDate}
-              events={data.events}
-              onDateClick={handleDayClick}
-              onMonthChange={setDisplayedMonth}
-            />
-          </div>
+      <div className={styles.container} style={{ transform: `scale(${backgroundScale}) rotate3d(1, 0, 0, 10deg)` }}>
+        <div className={styles.contentOverlay}>
+          <header className={styles.header}>
+            <div className={styles.currentDate}>
+              <div>
+                {formatDateWithWeekday(data.date)}
+              </div>s
+              <div>
+                Bell {formatTime(data.time.bell, data.time.knot)}
+              </div>
+            </div>
+            {!isViewingToday && (
+              <button className={styles.todayButton} onClick={handleReturnToToday}>
+                Return to Today
+              </button>
+            )}
+          </header>
+          
+          <Calendar
+            currentDate={data.date}
+            displayedMonth={currentMonth}
+            selectedDate={selectedDate}
+            events={data.events}
+            onDateClick={handleDayClick}
+            onMonthChange={setDisplayedMonth}
+          />
 
-          <div className={styles.rightColumn}>
-            <TimeOfDay time={data.time} />
-            <AdventureLog
-              entries={data.adventureLog || []}
-              selectedDate={selectedDate || data.date}
-              currentDate={data.date}
-            />
-          </div>
+          <TimeOfDay time={data.time} />
+
+          <AdventureLog
+            entries={data.adventureLog || []}
+            events={data.events || []}
+            selectedDate={selectedDate || data.date}
+            currentDate={data.date}
+          />
         </div>
-
-        <footer className={styles.footer}>
-          <p>Obojima Party Tracker - A D&D Campaign Companion</p>
-        </footer>
+        
       </div>
+      
     </div>
   );
 }

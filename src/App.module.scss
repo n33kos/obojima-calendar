@@ -1,20 +1,53 @@
 @import '@/styles/variables.scss';
 
 .app {
+  position: relative;
   min-height: 100vh;
-  padding: $spacing-xl;
-  background: linear-gradient(
-    135deg,
-    lighten($color-background, 3%) 0%,
-    $color-background 50%,
-    darken($color-background, 2%) 100%
-  );
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0;
+
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 67 / 39; // matches the aspect ratio of the background image's piece of paper
+  transform-origin: center;
+  translate: -50% -50%;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contentOverlay {
+  display: flex;
 }
 
 .header {
   text-align: center;
-  margin-bottom: $spacing-xl;
+  margin-bottom: 2vh;
   position: relative;
+  width: 100%;
+  padding: 0 4vw;
 }
 
 .todayButton {
@@ -24,9 +57,9 @@
   transform: translateY(-50%);
   background: $color-accent;
   color: white;
-  padding: $spacing-sm $spacing-lg;
+  padding: clamp(0.25rem, 0.5vh, 1rem) clamp(0.5rem, 1vw, 2rem);
   border-radius: $radius-md;
-  font-size: $font-size-sm;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
   font-weight: $font-weight-bold;
   transition: all $transition-fast;
   border: 2px solid $color-accent;
@@ -40,42 +73,6 @@
 
   &:active {
     transform: translateY(-50%) scale(0.98);
-  }
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-xl;
-
-  @media (min-width: $breakpoint-md) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media (min-width: $breakpoint-lg) {
-    grid-template-columns: 2fr 1fr;
-  }
-}
-
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xl;
-}
-
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xl;
-
-  @media (min-width: $breakpoint-md) {
-    grid-row: 1 / 3;
-    grid-column: 2;
   }
 }
 
@@ -163,14 +160,15 @@
 
 .currentDate {
   text-align: center;
-  font-size: clamp($font-size-lg, 2.5vw, $font-size-xl);
+  font-size: clamp(0.875rem, 1.8vw, 1.5rem);
   color: $color-primary;
   font-weight: $font-weight-bold;
-  padding: $spacing-lg;
-  background: $color-surface;
+  padding: clamp(0.5rem, 1.5vh, 2rem);
   border-radius: $radius-lg;
   box-shadow: $shadow-md;
   border: 2px solid $color-border;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .footer {
