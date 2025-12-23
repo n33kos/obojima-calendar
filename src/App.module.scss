@@ -13,21 +13,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: $spacing-xxl;
-}
-
-.title {
-  font-size: clamp($font-size-xxl, 4vw, 3rem);
-  color: $color-primary;
-  margin-bottom: $spacing-sm;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.subtitle {
-  font-size: $font-size-lg;
-  color: $color-text-secondary;
-  font-weight: $font-weight-normal;
-  font-style: italic;
+  margin-bottom: $spacing-xl;
 }
 
 .container {
@@ -150,13 +136,14 @@
 
 .currentDate {
   text-align: center;
-  font-size: $font-size-lg;
-  color: $color-text-secondary;
-  margin-top: $spacing-md;
-  padding: $spacing-md;
+  font-size: clamp($font-size-lg, 2.5vw, $font-size-xl);
+  color: $color-primary;
+  font-weight: $font-weight-bold;
+  padding: $spacing-lg;
   background: $color-surface;
-  border-radius: $radius-md;
-  box-shadow: $shadow-sm;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  border: 2px solid $color-border;
 }
 
 .footer {

@@ -57,6 +57,17 @@
   margin-top: $spacing-md;
 }
 
+.twelveHour {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-secondary;
+  text-align: center;
+  margin-top: $spacing-md;
+  margin-bottom: $spacing-sm;
+  font-family: $font-family-mono;
+  letter-spacing: 1px;
+}
+
 .description {
   font-size: $font-size-sm;
   color: $color-text-secondary;

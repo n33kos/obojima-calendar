@@ -2,7 +2,7 @@ import { useCalendarData } from './hooks/useCalendarData';
 import { Calendar } from './components/Calendar/Calendar';
 import { TimeOfDay } from './components/TimeOfDay/TimeOfDay';
 import { AdventureLog } from './components/AdventureLog/AdventureLog';
-import { formatDateWithWeekday } from './utils/calendar.utils';
+import { formatDateWithTime } from './utils/calendar.utils';
 import styles from './App.module.scss';
 
 // Configuration - Update these with your Gist details
@@ -70,10 +70,8 @@ function App() {
     <div className={styles.app}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <h1 className={styles.title}>Obojima Party Tracker</h1>
-          <p className={styles.subtitle}>Adventure Chronicle & Calendar</p>
           <div className={styles.currentDate}>
-            {formatDateWithWeekday(data.date)}
+            {formatDateWithTime(data.date, data.time.bell, data.time.knot)}
           </div>
         </header>
 

@@ -1,5 +1,5 @@
 import type { TimeOfDayProps } from './TimeOfDay.types';
-import { BELLS_PER_DAY, KNOTS_PER_BELL } from '@/utils/calendar.utils';
+import { BELLS_PER_DAY, KNOTS_PER_BELL, bellKnotTo12Hour } from '@/utils/calendar.utils';
 import styles from './TimeOfDay.module.scss';
 
 const BELL_DESCRIPTIONS = [
@@ -16,6 +16,7 @@ const BELL_DESCRIPTIONS = [
 export function TimeOfDay({ time }: TimeOfDayProps) {
   const { bell, knot } = time;
   const description = BELL_DESCRIPTIONS[bell - 1] || 'Unknown time';
+  const twelveHourTime = bellKnotTo12Hour(bell, knot);
 
   return (
     <div className={styles.timeOfDay}>
@@ -34,6 +35,8 @@ export function TimeOfDay({ time }: TimeOfDayProps) {
           <div className={styles.value}>{knot}</div>
         </div>
       </div>
+
+      <div className={styles.twelveHour}>{twelveHourTime}</div>
 
       <div className={styles.description}>{description}</div>
 
