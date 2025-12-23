@@ -1,0 +1,143 @@
+{
+  "currentDate": {
+    "year": 327,
+    "era": "AD",
+    "month": "Sep",
+    "day": 13
+  },
+  "currentTime": {
+    "bell": 3,
+    "knot": 2
+  },
+  "events": [
+    {
+      "id": "event-1",
+      "title": "Festival of Lanterns",
+      "year": 327,
+      "era": "AD",
+      "month": "Ock",
+      "day": 15,
+      "description": "Annual celebration in the town square. Lanterns are lit at dusk and floated down the river to honor ancestors.",
+      "isImportant": true
+    },
+    {
+      "id": "event-2",
+      "title": "Market Day",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 21,
+      "description": "Weekly market in Windwhisper Village",
+      "isImportant": false
+    },
+    {
+      "id": "event-3",
+      "title": "Full Moon Gathering",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 28,
+      "description": "The druids meet at the ancient stone circle",
+      "isImportant": false
+    }
+  ],
+  "adventureLog": [
+    {
+      "id": "session-3",
+      "sessionNumber": 3,
+      "title": "The Shadow in the Depths",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 13,
+      "summary": "Following the clues from the ancient ruins, the party ventured into the underground caverns beneath the Whispering Woods. There they discovered a forgotten temple and encountered a mysterious shadow creature guarding an ancient artifact.",
+      "highlights": [
+        "Solved the puzzle of the three elemental stones",
+        "Defeated the shadow guardian in an intense battle",
+        "Discovered the Amulet of Moon's Whisper",
+        "Found a map leading to the Skyward Mountains"
+      ],
+      "npcsEncountered": [
+        "The Shadow Guardian (defeated)",
+        "Spirit of the Lost Priestess"
+      ],
+      "locationsVisited": [
+        "Caverns of Echoes",
+        "The Forgotten Temple",
+        "Underground River"
+      ],
+      "itemsAcquired": [
+        "Amulet of Moon's Whisper",
+        "Ancient Map Fragment",
+        "Shadow Crystal",
+        "Priestess's Journal",
+        "Gold (340 pieces)"
+      ]
+    },
+    {
+      "id": "session-2",
+      "sessionNumber": 2,
+      "title": "Secrets of the Shrine",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 11,
+      "summary": "The party returned to the ancient shrine ruins to investigate further. They deciphered ancient inscriptions that revealed the location of a hidden entrance to underground caverns. Along the way, they helped a lost spirit find peace.",
+      "highlights": [
+        "Deciphered the ancient runes using the Map Fragment",
+        "Helped the spirit of a lost child return home",
+        "Uncovered the entrance to the underground caverns",
+        "Merchant Yumi provided supplies at a discount"
+      ],
+      "npcsEncountered": [
+        "Spirit of Lost Child",
+        "Merchant Yumi (returned)",
+        "Scholar Akane"
+      ],
+      "locationsVisited": [
+        "Ancient Shrine Ruins",
+        "Spirit's Grove",
+        "Windwhisper Library"
+      ],
+      "itemsAcquired": [
+        "Rope (50 ft)",
+        "Torches (10)",
+        "Rations (5 days)",
+        "Translation Notes",
+        "Spirit Charm (gift from the child's spirit)"
+      ]
+    },
+    {
+      "id": "session-1",
+      "sessionNumber": 1,
+      "title": "The Journey Begins",
+      "year": 327,
+      "era": "AD",
+      "month": "Sep",
+      "day": 10,
+      "summary": "Our heroes met in the village of Windwhisper and accepted a quest to investigate strange occurrences in the nearby forest. Elder Kaito spoke of shadows that moved against the wind and strange sounds echoing from ancient ruins. The party ventured into the Whispering Woods and discovered the entrance to forgotten ruins, fighting off shadow wolves along the way.",
+      "highlights": [
+        "Met the mysterious Elder Kaito who spoke in riddles about 'the thin places'",
+        "Discovered ancient ruins hidden deep in the Whispering Woods",
+        "Fought off a pack of shadow wolves that seemed unnatural",
+        "Found a strange map fragment with symbols matching those in the ruins"
+      ],
+      "npcsEncountered": [
+        "Elder Kaito - Village elder and keeper of old stories",
+        "Merchant Yumi - Friendly traveling merchant",
+        "Guard Captain Hiro - Gruff but helpful town guard"
+      ],
+      "locationsVisited": [
+        "Windwhisper Village - A small trading post at the forest's edge",
+        "The Whispering Woods - Ancient forest with an eerie atmosphere",
+        "Ancient Shrine Ruins - Moss-covered stones with strange markings"
+      ],
+      "itemsAcquired": [
+        "Map Fragment (mysterious symbols)",
+        "Silver Bell (found in the ruins, rings with a pure tone)",
+        "Healing Potion x3 (gift from Merchant Yumi)",
+        "Shadow Wolf Pelt (might be valuable to the right person)"
+      ]
+    }
+  ]
+}

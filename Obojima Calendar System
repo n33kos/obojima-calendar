@@ -1,0 +1,142 @@
+# Obojima Calendar and Timekeeping
+
+## History
+Many different timekeeping systems have existed in Obojima over the centuries, but the current system was standardized about 327 years ago during the early Dara Age to facilitate trade and communication across regions. This sytem labelled each known era and established a consistent calendar structure that is still in use today.
+
+200 Years ago Piebald Vellum (AHA) introduced the Lilywin Reckoning system to provide a continuous year count starting from the founding of Lilywin. He began the work of convincing scholars that they should transition to the new system but passed away before finishing his work, while most scholars still use the traditional era system, many AHA members and academics have discussed recreating the Lilywin Reckoning system as the standard but in the absence of Piebald's original writings scholars bickered over the exact details of the system delaying its adoption.
+
+ADVENTURERS FOUND:
+The missing information in his original work was recently discovered in a hidden compartment of his desk but has not yet been published.
+
+## Core structure
+
+- **13 months** per year
+- **28 days** per month (exact)
+- **364 month-days** per year
+- **Weeks are perfect:** each month = **4 weeks**
+
+### Year-end correction days (Between-days)
+
+To keep months at exactly 28 days while still giving the year a clean ending, Obojima uses **one between-day** that belongs to **no month**.
+
+- **Veil Day**: 1 day after the last day of Month 13
+
+So:
+- Year length: **364 + 1 = 365 days**
+
+Veil Day is commonly used for festivals and deadlines (“by Veil Day”).
+
+---
+
+## Months (13)
+
+Short, easy-to-remember month names, reminiscent of ours, with one added at the end.
+
+| #  | Month | Abbrev | Notes                            |
+| -- | ----- | ------ | -------------------------------- |
+| 1  | Jan   | JAN    | cold clarity, new routes         |
+| 2  | Feb   | FEB    | thaw, first green                |
+| 3  | Mar   | MAR    | winds, restlessness              |
+| 4  | Apu   | APU    | rains, repairs                   |
+| 5  | Mei   | MEI    | blossoms, courting               |
+| 6  | Jun   | JUN    | bright days                      |
+| 7  | Jol   | JOL    | heat, festivals                  |
+| 8  | Aug   | AUG    | heavy fruit                      |
+| 9  | Sep   | SEP    | harvest begins                   |
+| 10 | Ock   | OCK    | lanterns, long shadows           |
+| 11 | Nov   | NOV    | fogs, quiet markets              |
+| 12 | Dez   | DEZ    | frost, hearths                   |
+| 13 | Vell  | VEL    | “thin sky” month; spirits nearer |
+
+**Veil Day** happens **after Vell 28**.
+
+---
+
+## Weeks + weekdays
+
+### Week-of-month
+
+Common speech:
+
+- **Firstweek, Secondweek, Thirdweek, Fourthweek**
+
+AHA shorthand:
+
+- **W1–W4**
+
+### Weekdays (7)
+
+1. **Tide Day**
+2. **Leaf Day**
+3. **Bell Day**
+4. **Hearth Day**
+5. **Gale Day**
+6. **Star Day**
+7. **Rest Day**
+
+---
+
+## Time of day
+
+Most towns use **Bells** (easy to call out and ties into Obojima’s bell culture).
+
+- **1 day = 8 Bells**
+- **1 Bell = 3 hours**
+- Optional granularity: **1 Bell = 6 Knots** (30 minutes each)
+
+Common speech:
+
+- “Meet on **Third Bell**.”
+- “Send it by **Seventh Bell**.”
+
+AHA logs time as \`**Bell**:Knot\` (e.g., **5:2**).
+
+---
+
+## Dating systems
+
+### 1) Old era notation (traditional)
+- **AF** (First Age): negative years (fuzzy/approximate)
+- **AN** (Nakudama Age): **826** years
+- **AH** (Human Age): ~**982** years
+- **AD** (Dara Age): current era, ~**327**
+
+**Format (common):** `AD 327, Sep 13`
+
+Current Date In:
+- Nakudama Age: `AN 2135, Sep 13`
+- Human Age: `AH 1309, Sep 13`
+- Dara Age: `AD 327, Sep 13`
+
+---
+
+### 2) AHA system (Piebald Vellum): Lilywin Reckoning
+To avoid cross-era comparisons, many AHA scholars use a continuous count.
+- **LW 0** = **Founding of Lilywin** (first widely verifiable event)
+- After: **LW 1, LW 2, ...**
+- Before: **LW -1, LW -2, ...**
+
+**Format (AHA ledger):** `LW 124, Sep 14, Bell Day, 3:0`
+
+---
+
+## Examples (each date style)
+
+### Spoken (common folk)
+- “**Star Day, Secondweek of Sep**”
+- “Meet on **Third Bell**.”
+
+### Standard calendar date (no era)
+- `Sep 14, Star Day`  
+- `Vell 28, Rest Day`
+
+### Old era notation (traditional)
+- `AD 327, Ock 06`  
+- `AH 642, Sep 14`
+
+### Lilywin Reckoning (AHA)
+- `LW 124, Sep 14, Bell, 3:0`
+
+### Veil Day (between-day)
+- `AD 327, Veil Day`  *(no month)*
+- `LW 124, Veil Day`

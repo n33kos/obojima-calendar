@@ -1,0 +1,144 @@
+@import '@/styles/variables.scss';
+
+.calendar {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-lg;
+  border: 2px solid $color-border;
+}
+
+.header {
+  margin-bottom: $spacing-lg;
+  text-align: center;
+}
+
+.monthName {
+  font-size: $font-size-xxl;
+  color: $color-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.yearEra {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  font-weight: $font-weight-normal;
+}
+
+.monthNotes {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-style: italic;
+  margin-top: $spacing-xs;
+}
+
+.weekdayHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  padding: 0 $spacing-xs;
+}
+
+.weekdayName {
+  text-align: center;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-text-secondary;
+  padding: $spacing-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: $spacing-sm;
+}
+
+.day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-sm;
+  transition: all $transition-fast;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background: $color-highlight;
+    border-color: $color-accent;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &.isCurrentDay {
+    background: $color-current-day;
+    color: white;
+    border-color: darken($color-current-day, 10%);
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      background: lighten($color-current-day, 5%);
+    }
+  }
+
+  &.hasEvent {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      width: 6px;
+      height: 6px;
+      background: $color-event;
+      border-radius: 50%;
+    }
+
+    &.isCurrentDay::after {
+      background: white;
+    }
+  }
+
+  &.hasImportantEvent {
+    &::after {
+      background: $color-important;
+    }
+
+    &.isCurrentDay::after {
+      background: gold;
+    }
+  }
+}
+
+.dayNumber {
+  font-size: $font-size-lg;
+  line-height: 1;
+}
+
+.veilDay {
+  grid-column: 1 / -1;
+  margin-top: $spacing-md;
+  padding: $spacing-lg;
+  background: linear-gradient(135deg, lighten($color-primary, 40%), lighten($color-secondary, 40%));
+  border: 2px solid $color-accent;
+  border-radius: $radius-lg;
+  text-align: center;
+  box-shadow: $shadow-md;
+
+  .veilDayTitle {
+    font-size: $font-size-xl;
+    color: $color-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  .veilDayDescription {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    font-style: italic;
+  }
+}

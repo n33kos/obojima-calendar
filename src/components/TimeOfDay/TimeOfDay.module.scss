@@ -1,0 +1,110 @@
+@import '@/styles/variables.scss';
+
+.timeOfDay {
+  background: $color-surface;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-lg;
+  border: 2px solid $color-border;
+  text-align: center;
+}
+
+.header {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: $spacing-md;
+  font-weight: $font-weight-bold;
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.bellDisplay,
+.knotDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: $spacing-xs;
+}
+
+.value {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  font-family: $font-family-mono;
+  line-height: 1;
+}
+
+.separator {
+  font-size: $font-size-xxl;
+  color: $color-text-muted;
+  font-weight: $font-weight-bold;
+  align-self: center;
+  margin-top: $spacing-md;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-style: italic;
+  padding: $spacing-md;
+  background: $color-background;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+}
+
+.bellIndicators {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-lg;
+  padding-top: $spacing-lg;
+  border-top: 1px solid $color-border;
+}
+
+.bellIndicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: $color-border;
+  transition: all $transition-fast;
+
+  &.active {
+    background: $color-accent;
+    box-shadow: 0 0 8px rgba($color-accent, 0.5);
+    transform: scale(1.2);
+  }
+}
+
+.knotIndicators {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-sm;
+}
+
+.knotIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: $color-border;
+  transition: all $transition-fast;
+
+  &.active {
+    background: $color-secondary;
+  }
+}
