@@ -1,0 +1,46 @@
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
+
+.App {
+  @include hiddenScrollbarBothAxes;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+}
+
+.Wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  min-width: 800px;
+}
+
+.PageContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  translate: -50% -50%;
+  display: flex;
+  gap: $spacing-xxl;
+}
+
+.Sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.BackgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}

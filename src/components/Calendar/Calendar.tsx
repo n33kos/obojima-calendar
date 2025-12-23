@@ -58,46 +58,46 @@ export function Calendar({
     const isSelectedDay = selectedDate?.month === displayedMonth && selectedDate?.day === 1;
 
     return (
-      <div className={styles.calendar}>
-        <div className={styles.header}>
-          <div className={styles.monthNavigation}>
+      <div className={styles.Calendar}>
+        <div className={styles.Header}>
+          <div className={styles.MonthNavigation}>
             <button
-              className={styles.navButton}
+              className={styles.NavButton}
               onClick={handlePrevMonth}
               aria-label="Previous month"
             >
               ‹
             </button>
-            <div className={styles.monthTitle}>
-              <h2 className={styles.monthName}>Veil Day</h2>
-              <div className={styles.yearEra}>
+            <div className={styles.MonthTitle}>
+              <h2 className={styles.MonthName}>Veil Day</h2>
+              <div className={styles.YearEra}>
                 {currentDate.era} {currentDate.year}
               </div>
             </div>
             <button
-              className={styles.navButton}
+              className={styles.NavButton}
               onClick={handleNextMonth}
               aria-label="Next month"
             >
               ›
             </button>
           </div>
-          {monthInfo && <div className={styles.monthNotes}>{monthInfo.notes}</div>}
+          {monthInfo && <div className={styles.MonthNotes}>{monthInfo.notes}</div>}
         </div>
-        <div className={styles.veilDayContainer}>
+        <div className={styles.VeilDayContainer}>
           <button
-            className={`${styles.veilDayButton} ${isCurrentDay ? styles.isCurrentDay : ''} ${
-              isSelectedDay ? styles.isSelectedDay : ''
-            } ${hasEvent ? styles.hasEvent : ''} ${
-              hasImportantEvent ? styles.hasImportantEvent : ''
+            className={`${styles.VeilDayButton} ${isCurrentDay ? styles.VeilDayButton__IsCurrentDay : ''} ${
+              isSelectedDay ? styles.VeilDayButton__IsSelectedDay : ''
+            } ${hasEvent ? styles.VeilDayButton__HasEvent : ''} ${
+              hasImportantEvent ? styles.VeilDayButton__HasImportantEvent : ''
             }`}
             onClick={() => handleDayClick(1)}
             aria-label={`Veil Day${isCurrentDay ? ' (current)' : ''}${
               isSelectedDay ? ' (selected)' : ''
             }${hasEvent ? `, ${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}` : ''}`}
           >
-            <div className={styles.veilDayTitle}>Veil Day</div>
-            <div className={styles.veilDayDescription}>
+            <div className={styles.VeilDayTitle}>Veil Day</div>
+            <div className={styles.VeilDayDescription}>
               The between-day
             </div>
           </button>
@@ -107,42 +107,42 @@ export function Calendar({
   }
 
   return (
-    <div className={styles.calendar}>
-      <div className={styles.header}>
-        <div className={styles.monthNavigation}>
+    <div className={styles.Calendar}>
+      <div className={styles.Header}>
+        <div className={styles.MonthNavigation}>
           <button
-            className={styles.navButton}
+            className={styles.NavButton}
             onClick={handlePrevMonth}
             aria-label="Previous month"
           >
             ‹
           </button>
-          <div className={styles.monthTitle}>
-            <h2 className={styles.monthName}>{monthInfo?.name}</h2>
-            <div className={styles.yearEra}>
+          <div className={styles.MonthTitle}>
+            <h2 className={styles.MonthName}>{monthInfo?.name}</h2>
+            <div className={styles.YearEra}>
               {currentDate.era} {currentDate.year}
             </div>
           </div>
           <button
-            className={styles.navButton}
+            className={styles.NavButton}
             onClick={handleNextMonth}
             aria-label="Next month"
           >
             ›
           </button>
         </div>
-        {monthInfo && <div className={styles.monthNotes}>{monthInfo.notes}</div>}
+        {monthInfo && <div className={styles.MonthNotes}>{monthInfo.notes}</div>}
       </div>
 
-      <div className={styles.weekdayHeader}>
+      <div className={styles.WeekdayHeader}>
         {WEEKDAYS.map((weekday) => (
-          <div key={weekday} className={styles.weekdayName}>
+          <div key={weekday} className={styles.WeekdayName}>
             {weekday.split(' ')[0]}
           </div>
         ))}
       </div>
 
-      <div className={styles.grid}>
+      <div className={styles.Grid}>
         {weeks.flat().map((day) => {
           const dayEvents = eventsByDay.get(day) || [];
           const hasEvent = dayEvents.length > 0;
@@ -155,17 +155,17 @@ export function Calendar({
           return (
             <button
               key={day}
-              className={`${styles.day} ${isCurrentDay ? styles.isCurrentDay : ''} ${
-                isSelectedDay ? styles.isSelectedDay : ''
-              } ${hasEvent ? styles.hasEvent : ''} ${
-                hasImportantEvent ? styles.hasImportantEvent : ''
+              className={`${styles.Day} ${isCurrentDay ? styles.Day__IsCurrentDay : ''} ${
+                isSelectedDay ? styles.Day__IsSelectedDay : ''
+              } ${hasEvent ? styles.Day__HasEvent : ''} ${
+                hasImportantEvent ? styles.Day__HasImportantEvent : ''
               }`}
               onClick={() => handleDayClick(day)}
               aria-label={`Day ${day}${isCurrentDay ? ' (current)' : ''}${
                 isSelectedDay ? ' (selected)' : ''
               }${hasEvent ? `, ${dayEvents.length} event${dayEvents.length > 1 ? 's' : ''}` : ''}`}
             >
-              <span className={styles.dayNumber}>{day}</span>
+              <span className={styles.DayNumber}>{day}</span>
             </button>
           );
         })}

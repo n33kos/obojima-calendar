@@ -1,0 +1,30 @@
+@import '@/styles/variables.scss';
+
+.Loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: $spacing-lg;
+}
+
+.Spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid $color-border;
+  border-top-color: $color-accent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.LoadingText {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+}

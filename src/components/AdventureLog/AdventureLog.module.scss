@@ -1,17 +1,17 @@
 @import '@/styles/variables.scss';
 @import '@/styles/mixins.scss';
 
-.adventureLog {
+.AdventureLog {
   position: relative;
 }
 
-.content {
+.Content {
   @include hiddenScrollbar;
   height: 310px;
   max-height: 100%;
 }
 
-.header {
+.Header {
   font-size: $font-size-xl;
   color: $color-primary;
   margin-bottom: $spacing-lg;
@@ -22,7 +22,7 @@
   z-index: $z-index-sticky;
 }
 
-.headerSubtitle {
+.HeaderSubtitle {
   font-size: $font-size-xs;
   color: $color-accent;
   margin-top: $spacing-xs;
@@ -31,13 +31,13 @@
   letter-spacing: 0.5px;
 }
 
-.entries {
+.Entries {
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
 }
 
-.entry {
+.Entry {
   padding-bottom: $spacing-lg;
   position: relative;
   transition: all $transition-base;
@@ -47,11 +47,11 @@
   }
 }
 
-.entryHeader {
+.EntryHeader {
   margin-bottom: $spacing-md;
 }
 
-.sessionNumber {
+.SessionNumber {
   display: inline-block;
   font-size: $font-size-xs;
   font-weight: $font-weight-bold;
@@ -64,27 +64,27 @@
   margin-bottom: $spacing-xs;
 }
 
-.entryTitle {
+.EntryTitle {
   font-size: $font-size-lg;
   font-weight: $font-weight-bold;
   color: $color-primary;
   margin-bottom: $spacing-xs;
 }
 
-.entryDate {
+.EntryDate {
   font-size: $font-size-sm;
   color: $color-text-muted;
   font-style: italic;
 }
 
-.summary {
+.Summary {
   font-size: $font-size-base;
   line-height: 1.6;
   color: $color-text-primary;
   margin-bottom: $spacing-md;
 }
 
-.section {
+.Section {
   margin-bottom: $spacing-md;
 
   &:last-child {
@@ -92,7 +92,7 @@
   }
 }
 
-.sectionTitle {
+.SectionTitle {
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
   color: $color-text-secondary;
@@ -104,13 +104,13 @@
   gap: $spacing-xs;
 }
 
-.list {
+.List {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.listItem {
+.ListItem {
   font-size: $font-size-sm;
   color: $color-text-secondary;
   padding: $spacing-xs 0;
@@ -126,13 +126,13 @@
   }
 }
 
-.tagList {
+.TagList {
   display: flex;
   flex-wrap: wrap;
   gap: $spacing-xs;
 }
 
-.tag {
+.Tag {
   font-size: $font-size-xs;
   color: $color-text-secondary;
   background: $color-background;
@@ -141,7 +141,7 @@
   border: 1px solid $color-border;
 }
 
-.emptyState {
+.EmptyState {
   text-align: center;
   padding: $spacing-xxl;
   color: $color-text-muted;
@@ -149,13 +149,13 @@
 }
 
 // Events Section
-.eventsSection {
+.EventsSection {
   margin-bottom: $spacing-lg;
   padding-bottom: $spacing-lg;
   border-bottom: 2px solid $color-border;
 }
 
-.eventsSectionTitle {
+.EventsSectionTitle {
   font-size: $font-size-lg;
   font-weight: $font-weight-bold;
   color: $color-primary;
@@ -163,13 +163,13 @@
   text-align: center;
 }
 
-.eventsList {
+.EventsList {
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
 }
 
-.event {
+.Event {
   background: $color-background;
   border: 2px solid $color-accent;
   border-radius: $radius-md;
@@ -182,14 +182,14 @@
   }
 }
 
-.importantEvent {
+.ImportantEvent {
   border-color: $color-important;
   background: lighten($color-important, 45%);
   border-width: 3px;
   box-shadow: 0 0 0 2px rgba($color-important, 0.1);
 }
 
-.eventHeader {
+.EventHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -197,14 +197,14 @@
   margin-bottom: $spacing-xs;
 }
 
-.eventTitle {
+.EventTitle {
   font-size: $font-size-base;
   font-weight: $font-weight-bold;
   color: $color-primary;
   margin: 0;
 }
 
-.importantBadge {
+.ImportantBadge {
   display: inline-block;
   font-size: $font-size-xs;
   font-weight: $font-weight-bold;
@@ -216,7 +216,7 @@
   letter-spacing: 0.5px;
 }
 
-.eventDescription {
+.EventDescription {
   font-size: $font-size-sm;
   color: $color-text-secondary;
   line-height: 1.5;

@@ -14,7 +14,7 @@ $color-text-primary: #2c2416;
 $color-text-secondary: #5a4a3a;
 $color-text-muted: #8b7d6b;
 
-$color-background: #f5efe6; // Cream/aged paper
+$color-background: #333; // Cream/aged paper
 $color-surface: #ffffff;
 $color-border: #8b6f47;
 
@@ -32,9 +32,9 @@ $spacing-xl: 2rem;
 $spacing-xxl: 3rem;
 
 // Typography
-$font-family-base: 'Fondamento', cursive, 'Georgia', 'Times New Roman', serif;
-$font-family-display: 'Fondamento', cursive, 'Cinzel', Georgia, serif; // For headers
-$font-family-mono: 'Courier New', monospace;
+$font-family-base: "Fondamento", cursive, "Georgia", "Times New Roman", serif;
+$font-family-display: "Fondamento", cursive, "Cinzel", Georgia, serif; // For headers
+$font-family-mono: "Courier New", monospace;
 
 $font-size-xs: 0.75rem;
 $font-size-sm: 0.875rem;

@@ -2,8 +2,8 @@
  * Global styles for Obojima Calendar
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fondamento&display=swap');
-@import './variables.scss';
+@import url("https://fonts.googleapis.com/css2?family=Fondamento&display=swap");
+@import "./variables.scss";
 
 * {
   margin: 0;
@@ -23,16 +23,19 @@ body {
   line-height: 1.6;
   color: $color-text-primary;
   background-color: $color-background;
-  min-height: 100vh;
 }
 
 #root {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $font-family-display;
   font-weight: $font-weight-bold;
   line-height: 1.2;

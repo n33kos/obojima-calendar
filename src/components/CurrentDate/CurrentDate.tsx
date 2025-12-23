@@ -6,19 +6,19 @@ export function CurrentDate({ date, time, isViewingToday = true, onReturnToToday
   const twelveHourTime = bellKnotTo12Hour(time.bell, time.knot);
 
   return (
-    <div className={styles.currentDate}>
+    <div className={styles.CurrentDate}>
       {!isViewingToday && onReturnToToday && (
-        <button className={styles.todayButton} onClick={onReturnToToday}>
+        <button className={styles.TodayButton} onClick={onReturnToToday}>
           Return to Today
         </button>
       )}
-      <div className={styles.dateDisplay}>
+      <div className={styles.DateDisplay}>
         {formatDateWithWeekday(date)}
       </div>
-      <div className={styles.timeDisplay}>
-        <span className={styles.bellTime}>Bell {formatTime(time.bell, time.knot)}</span>
-        <span className={styles.separator}>•</span>
-        <span className={styles.twelveHourTime}>{twelveHourTime}</span>
+      <div className={styles.TimeDisplay}>
+        <span className={styles.BellTime}>Bell {formatTime(time.bell, time.knot)}</span>
+        <span className={styles.Separator}>•</span>
+        <span className={styles.TwelveHourTime}>{twelveHourTime}</span>
       </div>
     </div>
   );

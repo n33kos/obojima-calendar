@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+
+// Background image dimensions (original size)
+const BACKGROUND_IMAGE_WIDTH = 1536;
+const BACKGROUND_IMAGE_HEIGHT = 1024;
 
 /**
  * Calculate the scale factor for a container to match a background image with object-fit: cover
  *
- * @param imageWidth - Original width of the background image
- * @param imageHeight - Original height of the background image
  * @returns The scale factor to apply to keep content in sync with the background
  */
-export function useBackgroundScale(imageWidth: number, imageHeight: number): number {
+export function useBackgroundScale(): number {
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
@@ -17,8 +19,8 @@ export function useBackgroundScale(imageWidth: number, imageHeight: number): num
 
       // Calculate how object-fit: cover scales the background image
       // It scales to the larger of width-ratio or height-ratio to ensure full coverage
-      const widthRatio = viewportWidth / imageWidth;
-      const heightRatio = viewportHeight / imageHeight;
+      const widthRatio = viewportWidth / BACKGROUND_IMAGE_WIDTH;
+      const heightRatio = viewportHeight / BACKGROUND_IMAGE_HEIGHT;
 
       // object-fit: cover uses the larger ratio to ensure the image covers the container
       const backgroundScale = Math.max(widthRatio, heightRatio);
@@ -30,13 +32,13 @@ export function useBackgroundScale(imageWidth: number, imageHeight: number): num
     calculateScale();
 
     // Recalculate on window resize
-    window.addEventListener('resize', calculateScale);
+    window.addEventListener("resize", calculateScale);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', calculateScale);
+      window.removeEventListener("resize", calculateScale);
     };
-  }, [imageWidth, imageHeight]);
+  }, []);
 
   return scale;
 }

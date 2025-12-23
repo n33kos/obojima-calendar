@@ -1,0 +1,54 @@
+@import '@/styles/variables.scss';
+
+.Error {
+  background: lighten($color-important, 35%);
+  border: 2px solid $color-important;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin: $spacing-xl auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.ErrorTitle {
+  font-size: $font-size-xl;
+  color: $color-important;
+  margin-bottom: $spacing-md;
+}
+
+.ErrorMessage {
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+}
+
+.ErrorDetails {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  font-family: $font-family-mono;
+  background: $color-background;
+  padding: $spacing-md;
+  border-radius: $radius-md;
+  overflow-x: auto;
+}
+
+.RetryButton {
+  background: $color-secondary;
+  color: white;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  transition: all $transition-fast;
+  margin-top: $spacing-lg;
+
+  &:hover {
+    background: darken($color-secondary, 10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

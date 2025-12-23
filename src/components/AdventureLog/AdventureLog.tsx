@@ -30,9 +30,9 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
 
   if (entries.length === 0) {
     return (
-      <div className={styles.adventureLog}>
-        <h2 className={styles.header}>Adventure Log</h2>
-        <div className={styles.emptyState}>
+      <div className={styles.AdventureLog}>
+        <h2 className={styles.Header}>Adventure Log</h2>
+        <div className={styles.EmptyState}>
           No sessions recorded yet. Your adventure awaits!
         </div>
       </div>
@@ -45,31 +45,31 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
     selectedDate.day === currentDate.day;
 
   return (
-    <div className={styles.adventureLog}>
-      <h2 className={styles.header}>
+    <div className={styles.AdventureLog}>
+      <h2 className={styles.Header}>
         Adventure Log
       </h2>
-      
-      <div className={styles.content}>
+
+      <div className={styles.Content}>
         {dateEvents.length > 0 && (
-          <div className={styles.eventsSection}>
-            <h3 className={styles.eventsSectionTitle}>
+          <div className={styles.EventsSection}>
+            <h3 className={styles.EventsSectionTitle}>
               Events on {formatDateWithWeekday(selectedDate)}
             </h3>
-            <div className={styles.eventsList}>
+            <div className={styles.EventsList}>
               {dateEvents.map((event) => (
                 <div
                   key={event.id}
-                  className={`${styles.event} ${event.isImportant ? styles.importantEvent : ''}`}
+                  className={`${styles.Event} ${event.isImportant ? styles.ImportantEvent : ''}`}
                 >
-                  <div className={styles.eventHeader}>
-                    <h4 className={styles.eventTitle}>{event.title}</h4>
+                  <div className={styles.EventHeader}>
+                    <h4 className={styles.EventTitle}>{event.title}</h4>
                     {event.isImportant && (
-                      <span className={styles.importantBadge}>Important</span>
+                      <span className={styles.ImportantBadge}>Important</span>
                     )}
                   </div>
                   {event.description && (
-                    <p className={styles.eventDescription}>{event.description}</p>
+                    <p className={styles.EventDescription}>{event.description}</p>
                   )}
                 </div>
               ))}
@@ -77,7 +77,7 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
           </div>
         )}
 
-        <div className={styles.entries}>
+        <div className={styles.Entries}>
           {sortedEntries.map((entry) => {
             const isNearest = nearestEntry?.id === entry.id && !isCurrentDate;
 
@@ -91,22 +91,22 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
                     entryRefs.current.delete(entry.id);
                   }
                 }}
-                className={`${styles.entry} ${isNearest ? styles.highlighted : ''}`}
+                className={`${styles.Entry} ${isNearest ? styles.highlighted : ''}`}
               >
-              <div className={styles.entryHeader}>
-                <div className={styles.sessionNumber}>Session {entry.sessionNumber}</div>
-                <h3 className={styles.entryTitle}>{entry.title}</h3>
-                <div className={styles.entryDate}>{formatDateWithWeekday(entry.date)}</div>
+              <div className={styles.EntryHeader}>
+                <div className={styles.SessionNumber}>Session {entry.sessionNumber}</div>
+                <h3 className={styles.EntryTitle}>{entry.title}</h3>
+                <div className={styles.EntryDate}>{formatDateWithWeekday(entry.date)}</div>
               </div>
 
-              <div className={styles.summary}>{entry.summary}</div>
+              <div className={styles.Summary}>{entry.summary}</div>
 
               {entry.highlights && entry.highlights.length > 0 && (
-                <div className={styles.section}>
-                  <div className={styles.sectionTitle}>Highlights</div>
-                  <ul className={styles.list}>
+                <div className={styles.Section}>
+                  <div className={styles.SectionTitle}>Highlights</div>
+                  <ul className={styles.List}>
                     {entry.highlights.map((highlight, index) => (
-                      <li key={index} className={styles.listItem}>
+                      <li key={index} className={styles.ListItem}>
                         {highlight}
                       </li>
                     ))}
@@ -115,11 +115,11 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
               )}
 
               {entry.npcsEncountered && entry.npcsEncountered.length > 0 && (
-                <div className={styles.section}>
-                  <div className={styles.sectionTitle}>NPCs Encountered</div>
-                  <div className={styles.tagList}>
+                <div className={styles.Section}>
+                  <div className={styles.SectionTitle}>NPCs Encountered</div>
+                  <div className={styles.TagList}>
                     {entry.npcsEncountered.map((npc, index) => (
-                      <span key={index} className={styles.tag}>
+                      <span key={index} className={styles.Tag}>
                         {npc}
                       </span>
                     ))}
@@ -128,11 +128,11 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
               )}
 
               {entry.locationsVisited && entry.locationsVisited.length > 0 && (
-                <div className={styles.section}>
-                  <div className={styles.sectionTitle}>Locations Visited</div>
-                  <div className={styles.tagList}>
+                <div className={styles.Section}>
+                  <div className={styles.SectionTitle}>Locations Visited</div>
+                  <div className={styles.TagList}>
                     {entry.locationsVisited.map((location, index) => (
-                      <span key={index} className={styles.tag}>
+                      <span key={index} className={styles.Tag}>
                         {location}
                       </span>
                     ))}
@@ -141,11 +141,11 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
               )}
 
               {entry.itemsAcquired && entry.itemsAcquired.length > 0 && (
-                <div className={styles.section}>
-                  <div className={styles.sectionTitle}>Items Acquired</div>
-                  <div className={styles.tagList}>
+                <div className={styles.Section}>
+                  <div className={styles.SectionTitle}>Items Acquired</div>
+                  <div className={styles.TagList}>
                     {entry.itemsAcquired.map((item, index) => (
-                      <span key={index} className={styles.tag}>
+                      <span key={index} className={styles.Tag}>
                         {item}
                       </span>
                     ))}

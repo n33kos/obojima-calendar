@@ -1,16 +1,16 @@
 @import '@/styles/variables.scss';
 
-.calendar {
+.Calendar {
   position: relative;
   width: 480px;
 }
 
-.header {
+.Header {
   margin-bottom: $spacing-sm;
   text-align: center;
 }
 
-.monthNavigation {
+.MonthNavigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   margin-bottom: $spacing-sm;
 }
 
-.navButton {
+.NavButton {
   border: 2px solid $color-border;
   border-radius: $radius-md;
   width: 40px;
@@ -43,31 +43,31 @@
   }
 }
 
-.monthTitle {
+.MonthTitle {
   flex: 1;
   text-align: center;
 }
 
-.monthName {
+.MonthName {
   font-size: $font-size-xxl;
   color: $color-primary;
   margin-bottom: $spacing-xs;
 }
 
-.yearEra {
+.YearEra {
   font-size: $font-size-lg;
   color: $color-text-secondary;
   font-weight: $font-weight-normal;
 }
 
-.monthNotes {
+.MonthNotes {
   font-size: $font-size-sm;
   color: $color-text-muted;
   font-style: italic;
   margin-top: $spacing-xs;
 }
 
-.weekdayHeader {
+.WeekdayHeader {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: $spacing-sm;
@@ -75,7 +75,7 @@
   padding: 0 $spacing-xs;
 }
 
-.weekdayName {
+.WeekdayName {
   text-align: center;
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
@@ -85,12 +85,12 @@
   letter-spacing: 0.5px;
 }
 
-.grid {
+.Grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.day {
+.Day {
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@
     box-shadow: $shadow-lg;
   }
 
-  &.isCurrentDay {
+  &.Day__IsCurrentDay {
     background: darken($color-primary, 15%);
     color: white;
     border: 1px solid rgba($color-border, 0.6);
@@ -125,13 +125,13 @@
     }
   }
 
-  &.isSelectedDay {
+  &.Day__IsSelectedDay {
     border-color: darken($color-primary, 10%);
     font-weight: $font-weight-bold;
     box-shadow: $shadow-lg;
   }
 
-  &.hasEvent {
+  &.Day__HasEvent {
     &::after {
       content: '';
       position: absolute;
@@ -142,28 +142,28 @@
       border-radius: 50%;
     }
 
-    &.isCurrentDay::after {
+    &.Day__IsCurrentDay::after {
       background: white;
     }
   }
 
-  &.hasImportantEvent {
+  &.Day__HasImportantEvent {
     &::after {
       background: $color-important;
     }
 
-    &.isCurrentDay::after {
+    &.Day__IsCurrentDay::after {
       background: gold;
     }
   }
 }
 
-.dayNumber {
+.DayNumber {
   font-size: $font-size-lg;
   line-height: 1;
 }
 
-.veilDay {
+.VeilDay {
   grid-column: 1 / -1;
   margin-top: $spacing-md;
   padding: $spacing-lg;
@@ -173,26 +173,26 @@
   text-align: center;
   box-shadow: $shadow-md;
 
-  .veilDayTitle {
+  .VeilDayTitle {
     font-size: $font-size-xl;
     color: $color-primary;
     margin-bottom: $spacing-xs;
   }
 
-  .veilDayDescription {
+  .VeilDayDescription {
     font-size: $font-size-sm;
     color: $color-text-secondary;
     font-style: italic;
   }
 }
 
-.veilDayContainer {
+.VeilDayContainer {
   display: flex;
   justify-content: center;
   padding: clamp(1rem, 3vh, 3rem);
 }
 
-.veilDayButton {
+.VeilDayButton {
   padding: clamp(1.5rem, 4vh, 4rem);
   text-align: center;
   background: linear-gradient(135deg, lighten($color-primary, 40%), lighten($color-secondary, 40%));
@@ -209,25 +209,25 @@
     border-color: $color-accent;
   }
 
-  &.isCurrentDay {
+  &.VeilDayButton__IsCurrentDay {
     border-color: $color-current-day;
     border-width: 3px;
     background: linear-gradient(135deg, $color-current-day, lighten($color-current-day, 20%));
     color: white;
 
-    .veilDayTitle,
-    .veilDayDescription {
+    .VeilDayTitle,
+    .VeilDayDescription {
       color: white;
     }
   }
 
-  &.isSelectedDay {
+  &.VeilDayButton__IsSelectedDay {
     border-color: $color-accent;
     border-width: 3px;
     box-shadow: 0 0 0 3px rgba($color-accent, 0.3);
   }
 
-  &.hasEvent::after {
+  &.VeilDayButton__HasEvent::after {
     content: '';
     position: absolute;
     top: 8px;
@@ -238,18 +238,18 @@
     border-radius: 50%;
   }
 
-  &.hasImportantEvent::after {
+  &.VeilDayButton__HasImportantEvent::after {
     background: $color-important;
   }
 
-  .veilDayTitle {
+  .VeilDayTitle {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: $font-weight-bold;
     color: $color-primary;
     margin-bottom: clamp(0.5rem, 1vh, 1rem);
   }
 
-  .veilDayDescription {
+  .VeilDayDescription {
     font-size: clamp(0.875rem, 1.5vw, 1.125rem);
     color: $color-text-secondary;
     font-style: italic;
