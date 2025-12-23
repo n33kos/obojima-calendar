@@ -241,7 +241,3 @@ Works great with:
 ## License
 
 MIT
-
-## Credits
-
-Built for the Obojima D&D campaign based on the Miyazaki/Legend of Zelda inspired 5e module.
