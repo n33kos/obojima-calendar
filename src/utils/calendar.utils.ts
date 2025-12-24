@@ -1,33 +1,38 @@
-import type { Month, MonthInfo, Weekday, CalendarDate } from '@/types';
+import type { Month, MonthInfo, Weekday, CalendarDate } from "@/types";
 
 /**
  * Calendar constants and utilities for Obojima calendar system
  */
 
 export const MONTHS: MonthInfo[] = [
-  { name: 'Jan', abbrev: 'JAN', number: 1, notes: 'cold clarity, new routes' },
-  { name: 'Feb', abbrev: 'FEB', number: 2, notes: 'thaw, first green' },
-  { name: 'Mar', abbrev: 'MAR', number: 3, notes: 'winds, restlessness' },
-  { name: 'Apu', abbrev: 'APU', number: 4, notes: 'rains, repairs' },
-  { name: 'Mei', abbrev: 'MEI', number: 5, notes: 'blossoms, courting' },
-  { name: 'Jun', abbrev: 'JUN', number: 6, notes: 'bright days' },
-  { name: 'Jol', abbrev: 'JOL', number: 7, notes: 'heat, festivals' },
-  { name: 'Aug', abbrev: 'AUG', number: 8, notes: 'heavy fruit' },
-  { name: 'Sep', abbrev: 'SEP', number: 9, notes: 'harvest begins' },
-  { name: 'Ock', abbrev: 'OCK', number: 10, notes: 'lanterns, long shadows' },
-  { name: 'Nov', abbrev: 'NOV', number: 11, notes: 'fogs, quiet markets' },
-  { name: 'Dez', abbrev: 'DEZ', number: 12, notes: 'frost, hearths' },
-  { name: 'Vell', abbrev: 'VEL', number: 13, notes: '"thin sky" month; spirits nearer' },
+  { name: "Jan", abbrev: "JAN", number: 1, notes: "cold clarity, new routes" },
+  { name: "Feb", abbrev: "FEB", number: 2, notes: "thaw, first green" },
+  { name: "Mar", abbrev: "MAR", number: 3, notes: "winds, restlessness" },
+  { name: "Apu", abbrev: "APU", number: 4, notes: "rains, repairs" },
+  { name: "Mei", abbrev: "MEI", number: 5, notes: "blossoms, courting" },
+  { name: "Jun", abbrev: "JUN", number: 6, notes: "bright days" },
+  { name: "Jol", abbrev: "JOL", number: 7, notes: "heat, festivals" },
+  { name: "Aug", abbrev: "AUG", number: 8, notes: "heavy fruit" },
+  { name: "Sep", abbrev: "SEP", number: 9, notes: "harvest begins" },
+  { name: "Ock", abbrev: "OCK", number: 10, notes: "lanterns, long shadows" },
+  { name: "Nov", abbrev: "NOV", number: 11, notes: "fogs, quiet markets" },
+  { name: "Dez", abbrev: "DEZ", number: 12, notes: "frost, hearths" },
+  {
+    name: "Vell",
+    abbrev: "VEL",
+    number: 13,
+    notes: '"thin sky" month; spirits nearer',
+  },
 ];
 
 export const WEEKDAYS: Weekday[] = [
-  'Tide Day',
-  'Leaf Day',
-  'Bell Day',
-  'Hearth Day',
-  'Gale Day',
-  'Star Day',
-  'Rest Day',
+  "Tide Day",
+  "Leaf Day",
+  "Bell Day",
+  "Hearth Day",
+  "Gale Day",
+  "Star Day",
+  "Rest Day",
 ];
 
 export const DAYS_PER_MONTH = 28;
@@ -82,19 +87,19 @@ export function formatTime(bell: number, knot: number): string {
  * Bell 1 = 3:00 AM, Bell 4 = 12:00 PM (noon)
  */
 export function bellKnotTo12Hour(bell: number, knot: number): string {
-  const totalMinutes = knot * 30 + (bell * 180); // Each knot is 30 minutes, Each Bell is 180 minutes
-  
+  const totalMinutes = knot * 30 + bell * 180; // Each knot is 30 minutes, Each Bell is 180 minutes
+
   const hours = Math.floor(totalMinutes / 60) % 24;
   const minutes = totalMinutes % 60;
 
   // Determine AM/PM
-  const period = hours >= 12 ? 'PM' : 'AM';
+  const period = hours >= 12 ? "PM" : "AM";
 
   // Convert to 12-hour format
   const displayHours = hours === 12 ? 12 : hours > 12 ? hours - 12 : hours;
 
   // Format with leading zeros for minutes
-  const displayMinutes = minutes.toString().padStart(2, '0');
+  const displayMinutes = minutes.toString().padStart(2, "0");
 
   return `${displayHours}:${displayMinutes} ${period}`;
 }
@@ -103,9 +108,6 @@ export function bellKnotTo12Hour(bell: number, knot: number): string {
  * Format a calendar date in common notation
  */
 export function formatDate(date: CalendarDate): string {
-  if (date.month === 'Veil') {
-    return `${date.era} ${date.year}, Veil Day`;
-  }
   return `${date.era} ${date.year}, ${date.month} ${date.day}`;
 }
 
@@ -113,30 +115,27 @@ export function formatDate(date: CalendarDate): string {
  * Format a calendar date with weekday
  */
 export function formatDateWithWeekday(date: CalendarDate): string {
-  if (date.month === 'Veil') {
-    return `${date.era} ${date.year}, Veil Day`;
-  }
   return `${date.weekday}, ${date.month} ${date.day}, ${date.era} ${date.year}`;
 }
 
 /**
  * Check if a date is Veil Day (or Vell month which only has 1 day)
  */
-export function isVeilDay(month: Month | 'Veil'): boolean {
-  return month === 'Veil' || month === 'Vell';
+export function isVeilDay(month: Month | "Veil"): boolean {
+  return month === "Veil" || month === "Vell";
 }
 
 /**
  * Get number of days in a month
  */
-export function getDaysInMonth(month: Month | 'Veil'): number {
+export function getDaysInMonth(month: Month | "Veil"): number {
   return isVeilDay(month) ? VELL_DAYS : DAYS_PER_MONTH;
 }
 
 /**
  * Generate calendar grid for a month (array of day numbers)
  */
-export function generateMonthGrid(month?: Month | 'Veil'): number[] {
+export function generateMonthGrid(month?: Month | "Veil"): number[] {
   const days = month ? getDaysInMonth(month) : DAYS_PER_MONTH;
   return Array.from({ length: days }, (_, i) => i + 1);
 }
@@ -144,7 +143,7 @@ export function generateMonthGrid(month?: Month | 'Veil'): number[] {
 /**
  * Generate calendar grid grouped by weeks
  */
-export function generateMonthGridByWeeks(month?: Month | 'Veil'): number[][] {
+export function generateMonthGridByWeeks(month?: Month | "Veil"): number[][] {
   const days = month ? getDaysInMonth(month) : DAYS_PER_MONTH;
 
   // For Vell (1 day), return single array with 1 element
