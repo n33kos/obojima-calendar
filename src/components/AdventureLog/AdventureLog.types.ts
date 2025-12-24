@@ -1,8 +1,7 @@
-import type { AdventureLogEntry, CalendarDate, CalendarEvent } from '@/types';
+import type { TimelineEntry, CalendarDate } from '@/types';
 
 export interface AdventureLogProps {
-  entries: AdventureLogEntry[];
-  events: CalendarEvent[];
+  timeline: TimelineEntry[];
   selectedDate: CalendarDate;
   currentDate: CalendarDate;
 }

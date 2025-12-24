@@ -6,6 +6,7 @@ export type {
   CalendarDate,
   TimeOfDay,
   CurrentState,
+  TimelineEntry,
   CalendarEvent,
   AdventureLogEntry,
   GistData,

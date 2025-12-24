@@ -9,9 +9,10 @@
     "bell": 4,
     "knot": 6
   },
-  "events": [
+  "timeline": [
     {
       "id": "event-1",
+      "type": "event",
       "title": "Festival of Lanterns",
       "year": 327,
       "era": "AD",
@@ -22,6 +23,7 @@
     },
     {
       "id": "event-2",
+      "type": "event",
       "title": "Market Day",
       "year": 327,
       "era": "AD",
@@ -32,6 +34,7 @@
     },
     {
       "id": "event-3",
+      "type": "event",
       "title": "Full Moon Gathering",
       "year": 327,
       "era": "AD",
@@ -44,6 +47,7 @@
   "adventureLog": [
     {
       "id": "session-3",
+      "type": "session",
       "sessionNumber": 3,
       "title": "The Shadow in the Depths",
       "year": 327,
@@ -76,6 +80,7 @@
     },
     {
       "id": "session-2",
+      "type": "session",
       "sessionNumber": 2,
       "title": "Secrets of the Shrine",
       "year": 327,
@@ -109,6 +114,7 @@
     },
     {
       "id": "session-1",
+      "type": "session",
       "sessionNumber": 1,
       "title": "The Journey Begins",
       "year": 327,

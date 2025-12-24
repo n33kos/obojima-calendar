@@ -36,10 +36,7 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
   // Initialize displayed month to current month on first load
   const currentMonth = useMemo(() => {
     if (!data) return null;
-    return (
-      displayedMonth ||
-      (data.date.month === "Veil" ? "Vell" : (data.date.month as Month))
-    );
+    return displayedMonth || data.date.month;
   }, [data, displayedMonth]);
 
   // Initialize displayed year to current year on first load
@@ -51,7 +48,12 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
   // Handler for day click
   const handleDayClick = useMemo(() => {
     if (!data || !currentMonth) return undefined;
-    return createHandleDayClick(data.date, currentMonth, setSelectedDate, setDisplayedMonth);
+    return createHandleDayClick(
+      data.date,
+      currentMonth,
+      setSelectedDate,
+      setDisplayedMonth
+    );
   }, [data, currentMonth]);
 
   // Handler to return to current date

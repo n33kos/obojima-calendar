@@ -57,34 +57,38 @@ function App() {
             />
           )}
 
-          {!loading && !error && data && currentMonth && currentYear && handleDayClick && (
-            <>
-              <Calendar
-                currentDate={data.date}
-                displayedMonth={currentMonth}
-                displayedYear={currentYear}
-                selectedDate={selectedDate}
-                events={data.events}
-                onDateClick={handleDayClick}
-                onMonthChange={setDisplayedMonth}
-                onYearChange={setDisplayedYear}
-              />
-
-              <div className={styles.Sidebar}>
-                <CurrentDate
-                  date={data.date}
-                  time={data.time}
-                  onReturnToToday={handleReturnToToday}
-                />
-                <AdventureLog
-                  entries={data.adventureLog || []}
-                  events={data.events || []}
-                  selectedDate={selectedDate || data.date}
+          {!loading &&
+            !error &&
+            data &&
+            currentMonth &&
+            currentYear &&
+            handleDayClick && (
+              <>
+                <Calendar
                   currentDate={data.date}
+                  displayedMonth={currentMonth}
+                  displayedYear={currentYear}
+                  selectedDate={selectedDate}
+                  timeline={data.timeline}
+                  onDateClick={handleDayClick}
+                  onMonthChange={setDisplayedMonth}
+                  onYearChange={setDisplayedYear}
                 />
-              </div>
-            </>
-          )}
+
+                <div className={styles.Sidebar}>
+                  <CurrentDate
+                    date={data.date}
+                    time={data.time}
+                    onReturnToToday={handleReturnToToday}
+                  />
+                  <AdventureLog
+                    timeline={data.timeline}
+                    selectedDate={selectedDate || data.date}
+                    currentDate={data.date}
+                  />
+                </div>
+              </>
+            )}
         </div>
       </div>
     </div>

@@ -31,12 +31,25 @@
 }
 
 .Entry {
-  padding-bottom: $spacing-lg;
+  padding: $spacing-md 0;
   position: relative;
   transition: all $transition-base;
 
   &:not(:last-child) {
     border-bottom: 1px solid $color-border;
+  }
+
+  &__Highlighted {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -16px;
+      height: 100%;
+      width: 4px;
+      background: $color-accent;
+      border-radius: $radius-sm;
+    }
   }
 }
 
@@ -210,6 +223,53 @@
 }
 
 .EventDescription {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.SessionSummary {
+  background: lighten($color-accent, 35%);
+  border: 2px solid $color-accent;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba($color-accent, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.SessionHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-xs;
+}
+
+.SessionBadge {
+  display: inline-block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: $color-background;
+  background: $color-accent;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.SessionTitle {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin: 0;
+}
+
+.SessionText {
   font-size: $font-size-sm;
   color: $color-text-secondary;
   line-height: 1.5;

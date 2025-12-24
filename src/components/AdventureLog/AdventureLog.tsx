@@ -1,39 +1,41 @@
-import { useEffect, useRef, useMemo } from 'react';
-import type { AdventureLogProps } from './AdventureLog.types';
-import { formatDateWithWeekday } from '@/utils/calendar.utils';
-import { findNearestEntry, filterEventsByDate } from './AdventureLog.utils';
-import styles from './AdventureLog.module.scss';
+import { useEffect, useRef, useMemo } from "react";
+import type { AdventureLogProps } from "./AdventureLog.types";
+import { formatDateWithWeekday } from "@/utils/calendar.utils";
+import { findNearestEntry, sortTimelineEntries } from "./AdventureLog.utils";
+import styles from "./AdventureLog.module.scss";
 
-export function AdventureLog({ entries, events, selectedDate, currentDate }: AdventureLogProps) {
+export function AdventureLog({
+  timeline,
+  selectedDate,
+  currentDate,
+}: AdventureLogProps) {
   const entryRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-  // Sort entries by session number descending (most recent first)
-  const sortedEntries = [...entries].sort((a, b) => b.sessionNumber - a.sessionNumber);
+  // Sort timeline entries (most recent first)
+  const sortedTimeline = useMemo(
+    () => sortTimelineEntries(timeline),
+    [timeline]
+  );
 
-  // Find the nearest entry to the selected date
+  // Find the nearest session entry to the selected date
   const nearestEntry = useMemo(() => {
-    return findNearestEntry(entries, selectedDate);
-  }, [entries, selectedDate]);
-
-  // Filter events for the selected date
-  const dateEvents = useMemo(() => {
-    return filterEventsByDate(events, selectedDate);
-  }, [events, selectedDate]);
+    return findNearestEntry(timeline, selectedDate);
+  }, [timeline, selectedDate]);
 
   // Scroll to nearest entry when selected date changes
   useEffect(() => {
     if (nearestEntry && entryRefs.current.has(nearestEntry.id)) {
       const element = entryRefs.current.get(nearestEntry.id);
-      element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      element?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [nearestEntry]);
 
-  if (entries.length === 0) {
+  if (sortedTimeline.length === 0) {
     return (
       <div className={styles.AdventureLog}>
         <h2 className={styles.Header}>Adventure Log</h2>
         <div className={styles.EmptyState}>
-          No sessions recorded yet. Your adventure awaits!
+          No entries recorded yet. Your adventure awaits!
         </div>
       </div>
     );
@@ -46,39 +48,11 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
 
   return (
     <div className={styles.AdventureLog}>
-      <h2 className={styles.Header}>
-        Adventure Log
-      </h2>
+      <h2 className={styles.Header}>Adventure Log</h2>
 
       <div className={styles.Content}>
-        {dateEvents.length > 0 && (
-          <div className={styles.EventsSection}>
-            <h3 className={styles.EventsSectionTitle}>
-              Events on {formatDateWithWeekday(selectedDate)}
-            </h3>
-            <div className={styles.EventsList}>
-              {dateEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className={`${styles.Event} ${event.isImportant ? styles.ImportantEvent : ''}`}
-                >
-                  <div className={styles.EventHeader}>
-                    <h4 className={styles.EventTitle}>{event.title}</h4>
-                    {event.isImportant && (
-                      <span className={styles.ImportantBadge}>Important</span>
-                    )}
-                  </div>
-                  {event.description && (
-                    <p className={styles.EventDescription}>{event.description}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
         <div className={styles.Entries}>
-          {sortedEntries.map((entry) => {
+          {sortedTimeline.map((entry) => {
             const isNearest = nearestEntry?.id === entry.id && !isCurrentDate;
 
             return (
@@ -91,67 +65,92 @@ export function AdventureLog({ entries, events, selectedDate, currentDate }: Adv
                     entryRefs.current.delete(entry.id);
                   }
                 }}
-                className={`${styles.Entry} ${isNearest ? styles.highlighted : ''}`}
+                className={`${styles.Entry} ${
+                  isNearest ? styles.Entry__Highlighted : ""
+                }`}
               >
-              <div className={styles.EntryHeader}>
-                <div className={styles.SessionNumber}>Session {entry.sessionNumber}</div>
-                <h3 className={styles.EntryTitle}>{entry.title}</h3>
-                <div className={styles.EntryDate}>{formatDateWithWeekday(entry.date)}</div>
-              </div>
-
-              <div className={styles.Summary}>{entry.summary}</div>
-
-              {entry.highlights && entry.highlights.length > 0 && (
-                <div className={styles.Section}>
-                  <div className={styles.SectionTitle}>Highlights</div>
-                  <ul className={styles.List}>
-                    {entry.highlights.map((highlight, index) => (
-                      <li key={index} className={styles.ListItem}>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {entry.npcsEncountered && entry.npcsEncountered.length > 0 && (
-                <div className={styles.Section}>
-                  <div className={styles.SectionTitle}>NPCs Encountered</div>
-                  <div className={styles.TagList}>
-                    {entry.npcsEncountered.map((npc, index) => (
-                      <span key={index} className={styles.Tag}>
-                        {npc}
-                      </span>
-                    ))}
+                <div className={styles.EntryHeader}>
+                  {entry.sessionNumber && (
+                    <div className={styles.SessionNumber}>
+                      Session {entry.sessionNumber}
+                    </div>
+                  )}
+                  <h3 className={styles.EntryTitle}>{entry.title}</h3>
+                  <div className={styles.EntryDate}>
+                    {formatDateWithWeekday(entry.date)}
                   </div>
                 </div>
-              )}
 
-              {entry.locationsVisited && entry.locationsVisited.length > 0 && (
-                <div className={styles.Section}>
-                  <div className={styles.SectionTitle}>Locations Visited</div>
-                  <div className={styles.TagList}>
-                    {entry.locationsVisited.map((location, index) => (
-                      <span key={index} className={styles.Tag}>
-                        {location}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
+                {entry.description && (
+                  <div className={styles.Description}>{entry.description}</div>
+                )}
 
-              {entry.itemsAcquired && entry.itemsAcquired.length > 0 && (
-                <div className={styles.Section}>
-                  <div className={styles.SectionTitle}>Items Acquired</div>
-                  <div className={styles.TagList}>
-                    {entry.itemsAcquired.map((item, index) => (
-                      <span key={index} className={styles.Tag}>
-                        {item}
-                      </span>
-                    ))}
+                {entry.summary && (
+                  <div className={styles.Summary}>{entry.summary}</div>
+                )}
+
+                {entry.highlights && entry.highlights.length > 0 && (
+                  <div className={styles.Section}>
+                    <div className={styles.SectionTitle}>Highlights</div>
+                    <ul className={styles.List}>
+                      {entry.highlights.map(
+                        (highlight: string, index: number) => (
+                          <li key={index} className={styles.ListItem}>
+                            {highlight}
+                          </li>
+                        )
+                      )}
+                    </ul>
                   </div>
-                </div>
-              )}
+                )}
+
+                {entry.npcsEncountered && entry.npcsEncountered.length > 0 && (
+                  <div className={styles.Section}>
+                    <div className={styles.SectionTitle}>NPCs Encountered</div>
+                    <div className={styles.TagList}>
+                      {entry.npcsEncountered.map(
+                        (npc: string, index: number) => (
+                          <span key={index} className={styles.Tag}>
+                            {npc}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {entry.locationsVisited &&
+                  entry.locationsVisited.length > 0 && (
+                    <div className={styles.Section}>
+                      <div className={styles.SectionTitle}>
+                        Locations Visited
+                      </div>
+                      <div className={styles.TagList}>
+                        {entry.locationsVisited.map(
+                          (location: string, index: number) => (
+                            <span key={index} className={styles.Tag}>
+                              {location}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                {entry.itemsAcquired && entry.itemsAcquired.length > 0 && (
+                  <div className={styles.Section}>
+                    <div className={styles.SectionTitle}>Items Acquired</div>
+                    <div className={styles.TagList}>
+                      {entry.itemsAcquired.map(
+                        (item: string, index: number) => (
+                          <span key={index} className={styles.Tag}>
+                            {item}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           })}

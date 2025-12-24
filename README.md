@@ -252,3 +252,5 @@ MIT
 ## Todo
 
 - Allow changing between different era systems (AD, AH, AF, LW)
+- Animations for calendar transitions
+- Adding custom notes and events

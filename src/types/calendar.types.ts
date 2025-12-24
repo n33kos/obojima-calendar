@@ -3,19 +3,30 @@
  */
 
 export type Month =
-  | 'Jan' | 'Feb' | 'Mar' | 'Apu' | 'Mei' | 'Jun'
-  | 'Jol' | 'Aug' | 'Sep' | 'Ock' | 'Nov' | 'Dez' | 'Vell';
+  | "Jan"
+  | "Feb"
+  | "Mar"
+  | "Apu"
+  | "Mei"
+  | "Jun"
+  | "Jol"
+  | "Aug"
+  | "Sep"
+  | "Ock"
+  | "Nov"
+  | "Dez"
+  | "Vell";
 
 export type Weekday =
-  | 'Tide Day'
-  | 'Leaf Day'
-  | 'Bell Day'
-  | 'Hearth Day'
-  | 'Gale Day'
-  | 'Star Day'
-  | 'Rest Day';
+  | "Tide Day"
+  | "Leaf Day"
+  | "Bell Day"
+  | "Hearth Day"
+  | "Gale Day"
+  | "Star Day"
+  | "Rest Day";
 
-export type Era = 'AF' | 'AN' | 'AH' | 'AD' | 'LW';
+export type Era = "AF" | "AN" | "AH" | "AD" | "LW";
 
 export interface MonthInfo {
   name: Month;
@@ -27,7 +38,7 @@ export interface MonthInfo {
 export interface CalendarDate {
   year: number;
   era: Era;
-  month: Month | 'Veil';
+  month: Month;
   day: number;
   weekday: Weekday;
 }
@@ -40,60 +51,60 @@ export interface TimeOfDay {
 export interface CurrentState {
   date: CalendarDate;
   time: TimeOfDay;
+  timeline: TimelineEntry[];
+  // Legacy fields for backwards compatibility
   events?: CalendarEvent[];
   adventureLog?: AdventureLogEntry[];
 }
 
-export interface CalendarEvent {
+export interface TimelineEntry {
   id: string;
+  type: "event" | "session";
   title: string;
   date: CalendarDate;
+
+  // Event-specific fields
   description?: string;
   isImportant?: boolean;
-}
 
-export interface AdventureLogEntry {
-  id: string;
-  sessionNumber: number;
-  title: string;
-  date: CalendarDate;
-  summary: string;
+  // Session-specific fields
+  sessionNumber?: number;
+  summary?: string;
   highlights?: string[];
   npcsEncountered?: string[];
   locationsVisited?: string[];
   itemsAcquired?: string[];
 }
 
+// Legacy type aliases for backwards compatibility during transition
+export type CalendarEvent = TimelineEntry;
+export type AdventureLogEntry = TimelineEntry;
+
 export interface GistData {
   currentDate: {
     year: number;
     era: Era;
-    month: Month | 'Veil';
+    month: Month;
     day: number;
   };
   currentTime: {
     bell: number;
     knot: number;
   };
-  events?: Array<{
+  timeline?: Array<{
     id: string;
+    type: "event" | "session";
     title: string;
     year: number;
     era: Era;
-    month: Month | 'Veil';
+    month: Month;
     day: number;
+    // Event-specific
     description?: string;
     isImportant?: boolean;
-  }>;
-  adventureLog?: Array<{
-    id: string;
-    sessionNumber: number;
-    title: string;
-    year: number;
-    era: Era;
-    month: Month | 'Veil';
-    day: number;
-    summary: string;
+    // Session-specific
+    sessionNumber?: number;
+    summary?: string;
     highlights?: string[];
     npcsEncountered?: string[];
     locationsVisited?: string[];
