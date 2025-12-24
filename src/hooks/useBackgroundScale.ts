@@ -33,10 +33,12 @@ export function useBackgroundScale(): number {
 
     // Recalculate on window resize
     window.addEventListener("resize", calculateScale);
+    window.addEventListener("orientationchange", calculateScale);
 
     // Cleanup
     return () => {
       window.removeEventListener("resize", calculateScale);
+      window.removeEventListener("orientationchange", calculateScale);
     };
   }, []);
 

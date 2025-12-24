@@ -1,4 +1,4 @@
-import type { CalendarDate, Month } from '../../types';
+import type { CalendarDate, Month } from "../../types";
 
 /**
  * Creates a handler for day click events
@@ -14,8 +14,7 @@ export function createHandleDayClick(
   return (day: number) => {
     // Check if clicking on the current date
     const isCurrentDate =
-      currentDate.day === day &&
-      currentDate.month === displayedMonth;
+      currentDate.day === day && currentDate.month === displayedMonth;
 
     if (isCurrentDate) {
       // Return to today by clearing selection

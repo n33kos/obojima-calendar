@@ -96,10 +96,17 @@
   cursor: pointer;
   position: relative;
   outline: none !important;
+  color: $color-text-primary;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     box-shadow: $shadow-lg;
+    color: $color-text-primary;
+  }
+
+  &:focus,
+  &:active {
+    color: $color-text-primary;
   }
 
   &.Day__IsCurrentDay {
@@ -127,7 +134,7 @@
     }
 
     &.Day__IsCurrentDay::after {
-      background: white;
+      background: $color-primary;
     }
   }
 

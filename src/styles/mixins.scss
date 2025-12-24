@@ -2,6 +2,7 @@
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  overscroll-behavior: contain;
 
   &::-webkit-scrollbar {
     display: none;
