@@ -1,18 +1,16 @@
-export interface GistConfig {
-  username: string;
-  gistId: string;
-  filename: string;
+export interface DataConfig {
+  /** URL to fetch JSON data from */
+  dataUrl: string;
   refreshInterval: number;
 }
 
 /**
- * Loads GIST configuration from environment variables
+ * Loads data configuration from environment variables
  */
-export function getGistConfig(): GistConfig {
+export function getDataConfig(): DataConfig {
   return {
-    username: import.meta.env.VITE_GIST_USERNAME || "",
-    gistId: import.meta.env.VITE_GIST_ID || "",
-    filename: import.meta.env.VITE_GIST_FILENAME || "obojima-party-tracker.json",
-    refreshInterval: Number(import.meta.env.VITE_GIST_REFRESH_INTERVAL) || 60000,
+    dataUrl: import.meta.env.VITE_CALENDAR_DATA_URL || "",
+    refreshInterval:
+      Number(import.meta.env.VITE_CALENDAR_REFRESH_INTERVAL) || 1200000,
   };
 }

@@ -7,11 +7,8 @@ import type {
 import { getWeekday } from "./calendar.utils";
 
 /**
- * Utilities for fetching and parsing GitHub Gist data
+ * Utilities for fetching and parsing calendar data
  */
-
-const GIST_RAW_URL_TEMPLATE =
-  "https://gist.githubusercontent.com/{username}/{gist_id}/raw/{filename}";
 
 /**
  * Fetch data from local fallback file
@@ -28,34 +25,30 @@ async function fetchLocalData(): Promise<GistData> {
 }
 
 /**
- * Fetch data from a GitHub Gist with fallback to local file
+ * Fetch data from a URL with fallback to local file
  */
-export async function fetchGistData(
-  username: string,
-  gistId: string,
-  filename: string = "obojima-calendar.json"
-): Promise<GistData> {
-  // Try to fetch from GitHub Gist first
+export async function fetchCalendarData(dataUrl: string): Promise<GistData> {
+  // Try to fetch from URL first
   try {
-    const url = GIST_RAW_URL_TEMPLATE.replace("{username}", username)
-      .replace("{gist_id}", gistId)
-      .replace("{filename}", filename);
+    if (!dataUrl) {
+      throw new Error("No data URL provided");
+    }
 
-    console.log("Attempting to fetch from Gist:", url);
-    const response = await fetch(url);
+    console.log("Attempting to fetch from URL:", dataUrl);
+    const response = await fetch(dataUrl);
 
     if (!response.ok) {
-      throw new Error(`Gist fetch failed: ${response.statusText}`);
+      throw new Error(`Fetch failed: ${response.statusText}`);
     }
 
     const data = await response.json();
-    console.log("✓ Successfully loaded data from GitHub Gist");
+    console.log("✓ Successfully loaded data from remote URL");
     return data as GistData;
   } catch (error) {
-    // If Gist fetch fails, fall back to local file
+    // If remote fetch fails, fall back to local file
     console.warn(
-      "Failed to fetch from Gist, falling back to local data:",
-      error
+      "Failed to fetch from remote, falling back to local data:",
+      error,
     );
     console.log("Loading from /default-data.json...");
 
@@ -65,16 +58,24 @@ export async function fetchGistData(
       return localData;
     } catch (localError) {
       console.error("Failed to load local fallback data:", localError);
-      throw new Error("Failed to load data from both Gist and local fallback");
+      throw new Error(
+        "Failed to load data from both remote and local fallback",
+      );
     }
   }
 }
 
 /**
- * Transform gist data into application state
+ * Transform raw data into application state
  */
-export function transformGistData(gistData: GistData): CurrentState {
-  const { currentDate, currentTime, timeline = [] } = gistData;
+export function transformCalendarData(data: GistData): CurrentState {
+  const { currentDate, currentTime, timeline = [] } = data;
+
+  // Debug: log timeline entries to verify data
+  console.log("Timeline entries received:", timeline.length);
+  timeline.forEach((entry) => {
+    console.log(`  - ${entry.title}: ${entry.month} ${entry.day}, ${entry.year}`);
+  });
 
   const date: CalendarDate = {
     year: currentDate.year,
@@ -82,7 +83,9 @@ export function transformGistData(gistData: GistData): CurrentState {
     month: currentDate.month,
     day: currentDate.day,
     weekday:
-      currentDate.month === "Vell" ? "Rest Day" : getWeekday(currentDate.day),
+      currentDate.month === "VeilDay"
+        ? "Rest Day"
+        : getWeekday(currentDate.day),
   };
 
   // Use new timeline format
@@ -103,7 +106,7 @@ export function transformGistData(gistData: GistData): CurrentState {
       era: entry.era,
       month: entry.month,
       day: entry.day,
-      weekday: entry.month === "Vell" ? "Rest Day" : getWeekday(entry.day),
+      weekday: entry.month === "VeilDay" ? "Rest Day" : getWeekday(entry.day),
     },
   }));
 
@@ -111,7 +114,7 @@ export function transformGistData(gistData: GistData): CurrentState {
   timelineEntries.sort((a, b) => {
     if (a.date.year !== b.date.year) return b.date.year - a.date.year;
 
-    // Convert month to number for comparison
+    // Convert month to number for comparison (13 months + Veil Day)
     const monthOrder = [
       "Jan",
       "Feb",
@@ -120,12 +123,13 @@ export function transformGistData(gistData: GistData): CurrentState {
       "Mei",
       "Jun",
       "Jol",
-      "Aug",
+      "Ogg",
       "Sep",
       "Ock",
       "Nov",
       "Dez",
       "Vell",
+      "VeilDay",
     ];
     const aMonthNum = monthOrder.indexOf(a.date.month);
     const bMonthNum = monthOrder.indexOf(b.date.month);
@@ -142,9 +146,9 @@ export function transformGistData(gistData: GistData): CurrentState {
 }
 
 /**
- * Create example gist data structure (for documentation/setup)
+ * Create example data structure (for documentation/setup)
  */
-export function createExampleGistData(): GistData {
+export function createExampleData(): GistData {
   return {
     currentDate: {
       year: 327,

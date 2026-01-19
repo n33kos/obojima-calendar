@@ -71,20 +71,20 @@
 }
 
 .EntryTitle {
-  font-size: $font-size-lg;
+  font-size: $font-size-base;
   font-weight: $font-weight-bold;
   color: $color-primary;
   margin-bottom: $spacing-xs;
 }
 
 .EntryDate {
-  font-size: $font-size-sm;
+  font-size: $font-size-xs;
   color: $color-text-muted;
   font-style: italic;
 }
 
 .Summary {
-  font-size: $font-size-base;
+  font-size: $font-size-sm;
   line-height: 1.6;
   color: $color-text-primary;
   margin-bottom: $spacing-md;

@@ -9,7 +9,7 @@ const MONTH_ORDER = [
   "Mei",
   "Jun",
   "Jol",
-  "Aug",
+  "Ogg",
   "Sep",
   "Ock",
   "Nov",
@@ -34,7 +34,7 @@ export function dateToNumber(date: CalendarDate): number {
  */
 export function findNearestEntry(
   entries: TimelineEntry[],
-  selectedDate: CalendarDate
+  selectedDate: CalendarDate,
 ): TimelineEntry | null {
   if (entries.length === 0) return null;
 
@@ -86,7 +86,7 @@ export function findNearestEntry(
  * Sessions are prioritized over events on the same date
  */
 export function sortTimelineEntries(
-  timeline: TimelineEntry[]
+  timeline: TimelineEntry[],
 ): TimelineEntry[] {
   return [...timeline].sort((a, b) => {
     if (a.date.year !== b.date.year) return b.date.year - a.date.year;

@@ -10,12 +10,13 @@ export type Month =
   | "Mei"
   | "Jun"
   | "Jol"
-  | "Aug"
+  | "Ogg"
   | "Sep"
   | "Ock"
   | "Nov"
   | "Dez"
-  | "Vell";
+  | "Vell"
+  | "VeilDay";
 
 export type Weekday =
   | "Tide Day"

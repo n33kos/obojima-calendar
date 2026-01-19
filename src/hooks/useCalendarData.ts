@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { CurrentState } from '@/types';
-import { fetchGistData, transformGistData } from '@/utils/gist.utils';
+import { fetchCalendarData, transformCalendarData } from '@/utils/gist.utils';
 
 interface UseCalendarDataOptions {
-  username: string;
-  gistId: string;
-  filename?: string;
+  dataUrl: string;
   refreshInterval?: number; // milliseconds
 }
 
@@ -17,12 +15,10 @@ interface UseCalendarDataReturn {
 }
 
 /**
- * Hook to fetch and manage calendar data from GitHub Gist
+ * Hook to fetch and manage calendar data from a URL
  */
 export function useCalendarData({
-  username,
-  gistId,
-  filename = 'obojima-calendar.json',
+  dataUrl,
   refreshInterval,
 }: UseCalendarDataOptions): UseCalendarDataReturn {
   const [data, setData] = useState<CurrentState | null>(null);
@@ -33,8 +29,8 @@ export function useCalendarData({
     try {
       setLoading(true);
       setError(null);
-      const gistData = await fetchGistData(username, gistId, filename);
-      const transformedData = transformGistData(gistData);
+      const rawData = await fetchCalendarData(dataUrl);
+      const transformedData = transformCalendarData(rawData);
       setData(transformedData);
     } catch (err) {
       setError(err instanceof Error ? err : new Error('Failed to fetch calendar data'));
@@ -52,7 +48,7 @@ export function useCalendarData({
       const intervalId = setInterval(fetchData, refreshInterval);
       return () => clearInterval(intervalId);
     }
-  }, [username, gistId, filename, refreshInterval]);
+  }, [dataUrl, refreshInterval]);
 
   return {
     data,

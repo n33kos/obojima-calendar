@@ -29,15 +29,19 @@ export function Calendar({
   // Create a map of day -> timeline entries for quick lookup
   const entriesByDay = useMemo(() => {
     const map = new Map<number, typeof timeline>();
+    // eslint-disable-next-line no-console
+    console.warn(`[Calendar Debug] Building entriesByDay for "${displayedMonth}" ${displayedYear}, timeline has ${timeline.length} entries`);
     timeline.forEach((entry) => {
-      if (
-        entry.date.month === displayedMonth &&
-        entry.date.year === displayedYear
-      ) {
+      const matches = entry.date.month === displayedMonth && entry.date.year === displayedYear;
+      // eslint-disable-next-line no-console
+      console.warn(`  [Calendar Debug] "${entry.title}": month="${entry.date.month}" vs "${displayedMonth}", year=${entry.date.year} vs ${displayedYear} → ${matches ? "MATCH" : "no match"}`);
+      if (matches) {
         const existing = map.get(entry.date.day) || [];
         map.set(entry.date.day, [...existing, entry]);
       }
     });
+    // eslint-disable-next-line no-console
+    console.warn(`[Calendar Debug] Result: ${map.size} days with entries`);
     return map;
   }, [timeline, displayedMonth, displayedYear]);
 
@@ -46,11 +50,12 @@ export function Calendar({
   };
 
   // Handle month navigation with year wraparound
+  // 14 navigable slots: 13 months (1-13) + Veil Day (14)
   const handlePrevMonth = () => {
     const currentMonthNum = monthInfo?.number || 1;
     if (currentMonthNum === 1) {
-      // Going back from Jan (1) wraps to Vell (13) of previous year
-      const prevMonth = getMonthByNumber(13);
+      // Going back from Jan (1) wraps to Veil Day (14) of previous year
+      const prevMonth = getMonthByNumber(14);
       if (prevMonth) {
         onMonthChange?.(prevMonth.name as Month);
         onYearChange?.(displayedYear - 1);
@@ -66,8 +71,8 @@ export function Calendar({
 
   const handleNextMonth = () => {
     const currentMonthNum = monthInfo?.number || 1;
-    if (currentMonthNum === 13) {
-      // Going forward from Vell (13) wraps to Jan (1) of next year
+    if (currentMonthNum === 14) {
+      // Going forward from Veil Day (14) wraps to Jan (1) of next year
       const nextMonth = getMonthByNumber(1);
       if (nextMonth) {
         onMonthChange?.(nextMonth.name as Month);
@@ -109,7 +114,7 @@ export function Calendar({
               ‹
             </button>
             <div className={styles.MonthTitle}>
-              <h2 className={styles.MonthName}>Vell</h2>
+              <h2 className={styles.MonthName}>Veil Day</h2>
               <div className={styles.YearEra}>
                 {currentDate.era} {displayedYear}
               </div>

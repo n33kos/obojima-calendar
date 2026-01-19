@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { useCalendarData } from "../hooks/useCalendarData";
-import { getGistConfig } from "../config/gist.config";
+import { getDataConfig } from "../config/gist.config";
 import { createHandleDayClick } from "../components/App/App.utils";
 import type { CalendarDate, Month } from "../types";
 import type { CalendarDataContextValue } from "./CalendarDataContext.types";
@@ -20,8 +20,8 @@ export interface CalendarDataProviderProps {
 }
 
 export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
-  const gistConfig = getGistConfig();
-  const { data, loading, error, refetch } = useCalendarData(gistConfig);
+  const dataConfig = getDataConfig();
+  const { data, loading, error, refetch } = useCalendarData(dataConfig);
 
   // State for selected date, displayed month, and displayed year
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
