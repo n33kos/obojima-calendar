@@ -11,18 +11,18 @@
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  gap: clamp(0.25rem, 0.8vh, 1rem);
+  gap: clamp(0.5rem, 1.6vh, 2rem); // 2x for crisp scaling
   transition: all $transition-fast;
   border-radius: $radius-md;
   padding: $spacing-sm;
-  border: 2px solid transparent;
+  border: 4px solid transparent; // 2x for crisp scaling
 
   &:hover {
-    border: 2px solid $color-accent;
+    border: 4px solid $color-accent; // 2x for crisp scaling
   }
 
   &:focus-visible {
-    border: 2px solid $color-accent;
+    border: 4px solid $color-accent; // 2x for crisp scaling
   }
 
   &:active {

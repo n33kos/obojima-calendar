@@ -17,9 +17,9 @@
 
 .Content {
   @include hiddenScrollbar;
-  height: 310px;
+  height: 620px; // 2x for crisp scaling
   max-height: 100%;
-  border: 1px solid $color-text-muted;
+  border: 2px solid $color-text-muted; // 2x for crisp scaling
   padding: $spacing-md;
   border-radius: $radius-md;
 }
@@ -36,7 +36,7 @@
   transition: all $transition-base;
 
   &:not(:last-child) {
-    border-bottom: 1px solid $color-border;
+    border-bottom: 2px solid $color-border; // 2x for crisp scaling
   }
 
   &__Highlighted {
@@ -44,9 +44,9 @@
       content: "";
       position: absolute;
       top: 0;
-      left: -16px;
+      left: -32px; // 2x for crisp scaling
       height: 100%;
-      width: 4px;
+      width: 8px; // 2x for crisp scaling
       background: $color-accent;
       border-radius: $radius-sm;
     }
@@ -66,7 +66,7 @@
   padding: $spacing-xs $spacing-sm;
   border-radius: $radius-sm;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px; // 2x for crisp scaling
   margin-bottom: $spacing-xs;
 }
 
@@ -103,7 +103,7 @@
   font-weight: $font-weight-bold;
   color: $color-text-secondary;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px; // 2x for crisp scaling
   margin-bottom: $spacing-sm;
   display: flex;
   align-items: center;
@@ -144,7 +144,7 @@
   background: $color-background;
   padding: $spacing-xs $spacing-sm;
   border-radius: $radius-md;
-  border: 1px solid $color-border;
+  border: 2px solid $color-border; // 2x for crisp scaling
 }
 
 .EmptyState {
@@ -158,7 +158,7 @@
 .EventsSection {
   margin-bottom: $spacing-lg;
   padding-bottom: $spacing-lg;
-  border-bottom: 2px solid $color-border;
+  border-bottom: 4px solid $color-border; // 2x for crisp scaling
 }
 
 .EventsSectionTitle {
@@ -177,22 +177,22 @@
 
 .Event {
   background: $color-background;
-  border: 2px solid $color-event;
+  border: 4px solid $color-event; // 2x for crisp scaling
   border-radius: $radius-md;
   padding: $spacing-md;
   transition: all $transition-base;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba($color-event, 0.2);
-    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba($color-event, 0.2); // 2x for crisp scaling
+    transform: translateY(-4px); // 2x for crisp scaling
   }
 }
 
 .ImportantEvent {
   border-color: $color-important;
   background: lighten($color-important, 45%);
-  border-width: 3px;
-  box-shadow: 0 0 0 2px rgba($color-important, 0.1);
+  border-width: 6px; // 2x for crisp scaling
+  box-shadow: 0 0 0 4px rgba($color-important, 0.1); // 2x for crisp scaling
 }
 
 .EventHeader {
@@ -219,7 +219,7 @@
   padding: $spacing-xs $spacing-sm;
   border-radius: $radius-sm;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px; // 2x for crisp scaling
 }
 
 .EventDescription {
@@ -231,14 +231,14 @@
 
 .SessionSummary {
   background: lighten($color-accent, 35%);
-  border: 2px solid $color-accent;
+  border: 4px solid $color-accent; // 2x for crisp scaling
   border-radius: $radius-md;
   padding: $spacing-md;
   transition: all $transition-base;
 
   &:hover {
-    box-shadow: 0 2px 8px rgba($color-accent, 0.2);
-    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba($color-accent, 0.2); // 2x for crisp scaling
+    transform: translateY(-4px); // 2x for crisp scaling
   }
 }
 
@@ -258,7 +258,7 @@
   padding: $spacing-xs $spacing-sm;
   border-radius: $radius-sm;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px; // 2x for crisp scaling
   flex-shrink: 0;
 }
 

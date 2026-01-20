@@ -36,7 +36,8 @@ function App() {
         <div
           className={styles.PageContainer}
           style={{
-            transform: `perspective(1200px) scale(${backgroundScale}) rotate3d(1, 0, 0, 8deg)`,
+            // perspective doubled to 2400px to compensate for 2x sizing / 0.5x scale
+            transform: `perspective(2400px) scale(${backgroundScale}) rotate3d(1, 0, 0, 8deg)`,
           }}
         >
           {loading && <LoadingState />}

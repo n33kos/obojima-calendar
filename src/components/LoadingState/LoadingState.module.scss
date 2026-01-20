@@ -5,14 +5,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 400px;
+  min-height: 800px; // 2x for crisp scaling
   gap: $spacing-lg;
 }
 
 .Spinner {
-  width: 48px;
-  height: 48px;
-  border: 4px solid $color-border;
+  width: 96px; // 2x for crisp scaling
+  height: 96px; // 2x for crisp scaling
+  border: 8px solid $color-border; // 2x for crisp scaling
   border-top-color: $color-accent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
