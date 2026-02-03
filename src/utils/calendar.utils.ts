@@ -1,4 +1,10 @@
-import type { Month, MonthInfo, Weekday, CalendarDate } from "@/types";
+import type {
+  Month,
+  MonthInfo,
+  Weekday,
+  CalendarDate,
+  TimelineEntry,
+} from "@/types";
 
 /**
  * Calendar constants and utilities for Obojima calendar system
@@ -167,4 +173,87 @@ export function generateMonthGridByWeeks(month?: Month): number[][] {
     weeks.push(weekDays);
   }
   return weeks;
+}
+
+/**
+ * Era priority order (earliest to latest)
+ * Based on common fantasy era progression
+ */
+const ERA_ORDER: Record<string, number> = {
+  AF: 1, // Age of Founding
+  AN: 2, // Age of Nations
+  AH: 3, // Age of Heroes
+  AD: 4, // Age of Dragons
+  LW: 5, // Last War
+};
+
+/**
+ * Compare two calendar dates
+ * Returns:
+ *   < 0 if date1 is before date2
+ *   0 if dates are equal
+ *   > 0 if date1 is after date2
+ */
+export function compareDates(date1: CalendarDate, date2: CalendarDate): number {
+  // Compare era
+  const era1Priority = ERA_ORDER[date1.era] || 0;
+  const era2Priority = ERA_ORDER[date2.era] || 0;
+  if (era1Priority !== era2Priority) {
+    return era1Priority - era2Priority;
+  }
+
+  // Compare year
+  if (date1.year !== date2.year) {
+    return date1.year - date2.year;
+  }
+
+  // Compare month
+  const month1Info = getMonthInfo(date1.month);
+  const month2Info = getMonthInfo(date2.month);
+  const month1Number = month1Info?.number || 0;
+  const month2Number = month2Info?.number || 0;
+  if (month1Number !== month2Number) {
+    return month1Number - month2Number;
+  }
+
+  // Compare day
+  return date1.day - date2.day;
+}
+
+/**
+ * Sort timeline entries chronologically (earliest to latest)
+ * For entries on the same day:
+ * - Sessions are sorted by sessionNumber
+ * - Events maintain their original order
+ * - Sessions come before events on the same day
+ */
+export function sortTimelineEntriesByDate(
+  entries: TimelineEntry[]
+): TimelineEntry[] {
+  return [...entries].sort((a, b) => {
+    // First compare dates
+    const dateComparison = compareDates(a.date, b.date);
+    if (dateComparison !== 0) {
+      return dateComparison;
+    }
+
+    // Same date - use type and session number to break ties
+    // Sessions come before events
+    if (a.type === "session" && b.type === "event") {
+      return -1;
+    }
+    if (a.type === "event" && b.type === "session") {
+      return 1;
+    }
+
+    // Both sessions - sort by session number
+    if (a.type === "session" && b.type === "session") {
+      const sessionA = a.sessionNumber || 0;
+      const sessionB = b.sessionNumber || 0;
+      return sessionA - sessionB;
+    }
+
+    // Both events - maintain original order (stable sort)
+    return 0;
+  });
 }

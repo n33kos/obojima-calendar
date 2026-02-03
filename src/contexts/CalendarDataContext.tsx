@@ -25,6 +25,7 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
 
   // State for selected date, displayed month, and displayed year
   const [selectedDate, setSelectedDate] = useState<CalendarDate | null>(null);
+  const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
   const [displayedMonth, setDisplayedMonth] = useState<Month | null>(null);
   const [displayedYear, setDisplayedYear] = useState<number | null>(null);
 
@@ -52,7 +53,8 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
       data.date,
       currentMonth,
       setSelectedDate,
-      setDisplayedMonth
+      setDisplayedMonth,
+      setSelectedEntryId
     );
   }, [data, currentMonth]);
 
@@ -60,6 +62,7 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
   const handleReturnToToday = useMemo(() => {
     return () => {
       setSelectedDate(null);
+      setSelectedEntryId(null);
       setDisplayedMonth(null);
       setDisplayedYear(null);
     };
@@ -72,6 +75,8 @@ export function CalendarDataProvider({ children }: CalendarDataProviderProps) {
     refetch,
     selectedDate,
     setSelectedDate,
+    selectedEntryId,
+    setSelectedEntryId,
     displayedMonth,
     setDisplayedMonth,
     displayedYear,

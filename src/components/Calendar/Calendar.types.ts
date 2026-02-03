@@ -6,7 +6,7 @@ export interface CalendarProps {
   displayedYear: number;
   selectedDate: CalendarDate | null;
   timeline?: TimelineEntry[];
-  onDateClick?: (day: number) => void;
+  onDateClick?: (day: number, entryId?: string) => void;
   onMonthChange?: (month: Month) => void;
   onYearChange?: (year: number) => void;
 }

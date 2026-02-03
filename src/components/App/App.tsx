@@ -14,6 +14,7 @@ function App() {
     error,
     refetch,
     selectedDate,
+    selectedEntryId,
     currentMonth,
     currentYear,
     handleDayClick,
@@ -85,6 +86,7 @@ function App() {
                   <AdventureLog
                     timeline={data.timeline}
                     selectedDate={selectedDate || data.date}
+                    selectedEntryId={selectedEntryId}
                     currentDate={data.date}
                   />
                 </div>

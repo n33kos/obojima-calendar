@@ -10,6 +10,8 @@ export interface CalendarDataContextValue {
   // UI state
   selectedDate: CalendarDate | null;
   setSelectedDate: (date: CalendarDate | null) => void;
+  selectedEntryId: string | null;
+  setSelectedEntryId: (entryId: string | null) => void;
   displayedMonth: Month | null;
   setDisplayedMonth: (month: Month | null) => void;
   displayedYear: number | null;
@@ -21,6 +23,6 @@ export interface CalendarDataContextValue {
   currentYear: number | null;
 
   // Handlers
-  handleDayClick: ((day: number) => void) | undefined;
+  handleDayClick: ((day: number, entryId?: string) => void) | undefined;
   handleReturnToToday: () => void;
 }

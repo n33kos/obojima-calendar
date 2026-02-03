@@ -4,6 +4,7 @@ import {
   getMonthInfo,
   getMonthByNumber,
   generateMonthGridByWeeks,
+  sortTimelineEntriesByDate,
   WEEKDAYS,
   isVeilDay,
 } from "@/utils/calendar.utils";
@@ -23,18 +24,24 @@ export function Calendar({
   const monthInfo = getMonthInfo(displayedMonth);
   const weeks = useMemo(
     () => generateMonthGridByWeeks(displayedMonth),
-    [displayedMonth]
+    [displayedMonth],
   );
 
   // Create a map of day -> timeline entries for quick lookup
   const entriesByDay = useMemo(() => {
     const map = new Map<number, typeof timeline>();
     // eslint-disable-next-line no-console
-    console.warn(`[Calendar Debug] Building entriesByDay for "${displayedMonth}" ${displayedYear}, timeline has ${timeline.length} entries`);
+    console.warn(
+      `[Calendar Debug] Building entriesByDay for "${displayedMonth}" ${displayedYear}, timeline has ${timeline.length} entries`,
+    );
     timeline.forEach((entry) => {
-      const matches = entry.date.month === displayedMonth && entry.date.year === displayedYear;
+      const matches =
+        entry.date.month === displayedMonth &&
+        entry.date.year === displayedYear;
       // eslint-disable-next-line no-console
-      console.warn(`  [Calendar Debug] "${entry.title}": month="${entry.date.month}" vs "${displayedMonth}", year=${entry.date.year} vs ${displayedYear} → ${matches ? "MATCH" : "no match"}`);
+      console.warn(
+        `  [Calendar Debug] "${entry.title}": month="${entry.date.month}" vs "${displayedMonth}", year=${entry.date.year} vs ${displayedYear} → ${matches ? "MATCH" : "no match"}`,
+      );
       if (matches) {
         const existing = map.get(entry.date.day) || [];
         map.set(entry.date.day, [...existing, entry]);
@@ -45,8 +52,17 @@ export function Calendar({
     return map;
   }, [timeline, displayedMonth, displayedYear]);
 
-  const handleDayClick = (day: number) => {
-    onDateClick?.(day);
+  const handleDayClick = (day: number, entryId?: string) => {
+    onDateClick?.(day, entryId);
+  };
+
+  const handleDotClick = (
+    event: React.MouseEvent,
+    day: number,
+    entryId: string,
+  ) => {
+    event.stopPropagation(); // Prevent the day button click
+    handleDayClick(day, entryId);
   };
 
   // Handle month navigation with year wraparound
@@ -88,11 +104,8 @@ export function Calendar({
   };
 
   if (isVeilDay(displayedMonth)) {
-    const dayEntries = entriesByDay.get(1) || [];
+    const dayEntries = sortTimelineEntriesByDate(entriesByDay.get(1) || []);
     const hasEvent = dayEntries.length > 0;
-    const hasImportantEvent = dayEntries.some(
-      (e) => e.type === "event" && e.isImportant
-    );
     const isCurrentDay =
       currentDate.month === displayedMonth &&
       currentDate.day === 1 &&
@@ -135,11 +148,7 @@ export function Calendar({
           <button
             className={`${styles.VeilDayButton} ${
               isCurrentDay ? styles.VeilDayButton__IsCurrentDay : ""
-            } ${isSelectedDay ? styles.VeilDayButton__IsSelectedDay : ""} ${
-              hasEvent ? styles.VeilDayButton__HasEvent : ""
-            } ${
-              hasImportantEvent ? styles.VeilDayButton__HasImportantEvent : ""
-            }`}
+            } ${isSelectedDay ? styles.VeilDayButton__IsSelectedDay : ""}`}
             onClick={() => handleDayClick(1)}
             aria-label={`Veil Day${isCurrentDay ? " (current)" : ""}${
               isSelectedDay ? " (selected)" : ""
@@ -151,6 +160,26 @@ export function Calendar({
                 : ""
             }`}
           >
+            {dayEntries.length > 0 && (
+              <div className={styles.VeilDayDotContainer}>
+                {dayEntries.map((entry, index) => {
+                  const isImportant =
+                    entry.type === "event" && entry.isImportant;
+                  return (
+                    <button
+                      key={`${entry.id}-${index}`}
+                      className={`${styles.VeilDayDot} ${
+                        isImportant
+                          ? styles.VeilDayDot__Important
+                          : styles.VeilDayDot__Regular
+                      } ${isCurrentDay ? styles.VeilDayDot__CurrentDay : ""}`}
+                      onClick={(e) => handleDotClick(e, 1, entry.id)}
+                      aria-label={`Jump to ${entry.title}`}
+                    />
+                  );
+                })}
+              </div>
+            )}
             <div className={styles.VeilDayTitle}>Veil Day</div>
             <div className={styles.VeilDayDescription}>The between-day</div>
           </button>
@@ -199,11 +228,10 @@ export function Calendar({
 
       <div className={styles.Grid}>
         {weeks.flat().map((day) => {
-          const dayEntries = entriesByDay.get(day) || [];
-          const hasEvent = dayEntries.length > 0;
-          const hasImportantEvent = dayEntries.some(
-            (e) => e.type === "event" && e.isImportant
+          const dayEntries = sortTimelineEntriesByDate(
+            entriesByDay.get(day) || []
           );
+          const hasEvent = dayEntries.length > 0;
           const isCurrentDay =
             currentDate.month === displayedMonth &&
             currentDate.day === day &&
@@ -218,9 +246,7 @@ export function Calendar({
               key={day}
               className={`${styles.Day} ${
                 isCurrentDay ? styles.Day__IsCurrentDay : ""
-              } ${isSelectedDay ? styles.Day__IsSelectedDay : ""} ${
-                hasEvent ? styles.Day__HasEvent : ""
-              } ${hasImportantEvent ? styles.Day__HasImportantEvent : ""}`}
+              } ${isSelectedDay ? styles.Day__IsSelectedDay : ""}`}
               onClick={() => handleDayClick(day)}
               aria-label={`Day ${day}${isCurrentDay ? " (current)" : ""}${
                 isSelectedDay ? " (selected)" : ""
@@ -232,6 +258,26 @@ export function Calendar({
                   : ""
               }`}
             >
+              {dayEntries.length > 0 && (
+                <div className={styles.DotContainer}>
+                  {dayEntries.map((entry, index) => {
+                    const isImportant =
+                      entry.type === "event" && entry.isImportant;
+                    return (
+                      <button
+                        key={`${entry.id}-${index}`}
+                        className={`${styles.Dot} ${
+                          isImportant
+                            ? styles.Dot__Important
+                            : styles.Dot__Regular
+                        } ${isCurrentDay ? styles.Dot__CurrentDay : ""}`}
+                        onClick={(e) => handleDotClick(e, day, entry.id)}
+                        aria-label={`Jump to ${entry.title}`}
+                      />
+                    );
+                  })}
+                </div>
+              )}
               <span className={styles.DayNumber}>{day}</span>
             </button>
           );

@@ -121,31 +121,44 @@
     box-shadow: $shadow-lg;
     transform: translateY(-4px); // 2x for crisp scaling
   }
+}
 
-  &.Day__HasEvent {
-    &::after {
-      content: "";
-      position: absolute;
-      top: 12px; // 2x for crisp scaling
-      width: 16px; // 2x for crisp scaling
-      height: 16px; // 2x for crisp scaling
-      background: $color-event;
-      border-radius: 50%;
-    }
+.DotContainer {
+  position: absolute;
+  top: 8px; // 2x for crisp scaling
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px; // 2x for crisp scaling
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100% - 16px); // 2x for crisp scaling
+}
 
-    &.Day__IsCurrentDay::after {
-      background: $color-primary;
-    }
+.Dot {
+  width: 12px; // 2x for crisp scaling
+  height: 12px; // 2x for crisp scaling
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: scale(1.3);
   }
 
-  &.Day__HasImportantEvent {
-    &::after {
-      background: $color-important;
-    }
+  &.Dot__Regular {
+    background: $color-event;
+  }
 
-    &.Day__IsCurrentDay::after {
-      background: gold;
-    }
+  &.Dot__Important {
+    background: $color-important;
+  }
+
+  &.Dot__CurrentDay {
+    border: 1px solid $color-primary;
   }
 }
 
@@ -203,21 +216,6 @@
     box-shadow: 0 0 0 6px rgba($color-accent, 0.3); // 2x for crisp scaling
   }
 
-  &.VeilDayButton__HasEvent::after {
-    content: "";
-    position: absolute;
-    top: 16px; // 2x for crisp scaling
-    right: 16px; // 2x for crisp scaling
-    width: 16px; // 2x for crisp scaling
-    height: 16px; // 2x for crisp scaling
-    background: $color-event;
-    border-radius: 50%;
-  }
-
-  &.VeilDayButton__HasImportantEvent::after {
-    background: $color-important;
-  }
-
   .VeilDayTitle {
     font-size: clamp(3rem, 6vw, 4rem); // 2x for crisp scaling
     font-weight: $font-weight-bold;
@@ -229,5 +227,49 @@
     font-size: clamp(1.75rem, 3vw, 2.25rem); // 2x for crisp scaling
     color: $color-text-secondary;
     font-style: italic;
+  }
+}
+
+.VeilDayDotContainer {
+  position: absolute;
+  top: 16px; // 2x for crisp scaling
+  right: 16px; // 2x for crisp scaling
+  display: flex;
+  gap: 6px; // 2x for crisp scaling
+  flex-wrap: wrap;
+  max-width: 200px; // 2x for crisp scaling
+  justify-content: flex-end;
+}
+
+.VeilDayDot {
+  width: 16px; // 2x for crisp scaling
+  height: 16px; // 2x for crisp scaling
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform $transition-fast;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+
+  &.VeilDayDot__Regular {
+    background: $color-event;
+  }
+
+  &.VeilDayDot__Important {
+    background: $color-important;
+  }
+
+  &.VeilDayDot__CurrentDay {
+    &.VeilDayDot__Regular {
+      background: $color-primary;
+    }
+
+    &.VeilDayDot__Important {
+      background: gold;
+    }
   }
 }

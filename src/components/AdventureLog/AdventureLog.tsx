@@ -7,6 +7,7 @@ import styles from "./AdventureLog.module.scss";
 export function AdventureLog({
   timeline,
   selectedDate,
+  selectedEntryId,
   currentDate,
 }: AdventureLogProps) {
   const entryRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -18,15 +19,18 @@ export function AdventureLog({
     [timeline]
   );
 
-  // Find the nearest session entry to the selected date
-  const nearestEntry = useMemo(() => {
+  // Find the target entry - use selectedEntryId if provided, otherwise find nearest
+  const targetEntry = useMemo(() => {
+    if (selectedEntryId) {
+      return timeline.find((entry) => entry.id === selectedEntryId) || null;
+    }
     return findNearestEntry(timeline, selectedDate);
-  }, [timeline, selectedDate]);
+  }, [timeline, selectedDate, selectedEntryId]);
 
-  // Scroll to nearest entry when selected date changes
+  // Scroll to target entry when selection changes
   useEffect(() => {
-    if (nearestEntry && contentRef.current) {
-      const element = entryRefs.current.get(nearestEntry.id);
+    if (targetEntry && contentRef.current) {
+      const element = entryRefs.current.get(targetEntry.id);
       if (element) {
         const container = contentRef.current;
         const elementTop = element.offsetTop;
@@ -39,7 +43,7 @@ export function AdventureLog({
         });
       }
     }
-  }, [nearestEntry]);
+  }, [targetEntry]);
 
   if (sortedTimeline.length === 0) {
     return (
@@ -64,7 +68,7 @@ export function AdventureLog({
       <div ref={contentRef} className={styles.Content}>
         <div className={styles.Entries}>
           {sortedTimeline.map((entry) => {
-            const isNearest = nearestEntry?.id === entry.id && !isCurrentDate;
+            const isNearest = targetEntry?.id === entry.id && !isCurrentDate;
 
             return (
               <AdventureLogEntry
